@@ -1,6 +1,6 @@
 define(
-    ['backbonetastypie', 'text!templates/widgetslist.tpl'],
-    function(Backbone, tplWidgetsList) {
+    ['backbonetastypie', 'text!modules/widget/templates/widgetslist.tpl'],
+    function(Backbone, widgetsListTpl) {
         return Backbone.View.extend({
             tagName: 'div',
             className: 'well sidebar-nav',
@@ -11,7 +11,7 @@ define(
             events : {
             },
             render: function() {
-                this.$el.html(_.template(tplWidgetsList).template({ widgets : this.collection.toJSON()}));
+                this.$el.html(_.template(widgetsListTpl).template({ widgets : this.collection.toJSON()}));
                 return this;
             }
         });
