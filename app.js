@@ -1,12 +1,13 @@
 define(
-    [ 'modules/base/views/main', 'modules/widget/views/widgetslist' ],
-    function(MainView, WidgetsListView) {
+    [ 'backbone', 'modules/base/views/main', 'modules/widget/views/widgetslist' ],
+    function(Backbone, MainView, WidgetsListView) {
 
         var app = {
+            Router: null,
             MainView: MainView,
             initialize: function (){
                 var widgetsList = new WidgetsListView({/* Collection page ?created_by=user_id  */});
-                this.instance.MainView.render(widgetsList.render(), '.widgetslist');
+                this.MainView.render(widgetsList.render(), '.widgetslist');
             }
         };
 
@@ -57,7 +58,8 @@ define(
             }
         });
 
-        app.instance.router = new app.Router();
+        app.Router = new app.Router();
         Backbone.history.start(/*{pushState: true}*/);
         return app;
-    });
+    }
+);
