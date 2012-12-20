@@ -3,7 +3,7 @@ define(
     function(MainView, WidgetsListView) {
 
         var app = {
-            MainView: new MainView(),
+            MainView: MainView,
             initialize: function (){
                 var widgetsList = new WidgetsListView({/* Collection page ?created_by=user_id  */});
                 this.instance.MainView.render(widgetsList.render(), '.widgetslist');
