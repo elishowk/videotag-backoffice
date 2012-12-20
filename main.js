@@ -9,15 +9,15 @@ require.config({
         'i18n':     'lib/require-i18n-2.0.1.min',
         'jquery':   'lib/jquery-1.8.3.min',
         'underscore':   'lib/lodash-1.0.0.min',
-        'spin': 'lib/spin-1.2.7.js',
-        'backbone-validation': 'lib/backbone-validation-0.6.2.js',
+        'spin': 'lib/spin-1.2.7',
+        'backbone-validation': 'lib/backbone-validation-0.6.2',
         'bootstrap': 'lib/bootstrap-2.2.2',
-        'bootstrap-datepicker': 'lib/bootstrap-datepicker-2.0.js',
-        'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0.js',
-        'jquery-gravatar': 'lib/jquery-gravatar-1.0.1.js',
-        'md5': 'lib/md5-2.1.js',
-        'raven': 'lib/raven-0.6.min.js',
-        'app':      'videotag-backoffice/app',
+        'bootstrap-datepicker': 'lib/bootstrap-datepicker-2.0',
+        'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0',
+        'jquery-gravatar': 'lib/jquery-gravatar-1.0.1',
+        'md5': 'lib/md5-2.1',
+        'raven': 'lib/raven-0.6.min',
+        'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
         'page': 'videotag/page/'
     },
@@ -36,6 +36,7 @@ require.config({
 });
 
 define(['app', 'poser/backbone-tastypie-0.1'], function (App) {
+
     App.initialize();
 });
 
