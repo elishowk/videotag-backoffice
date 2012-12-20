@@ -11,7 +11,7 @@ define(
             events : {
             },
             render: function() {
-                this.$el.html(_.template(widgetsListTpl).template({ widgets : this.collection.toJSON()}));
+                this.$el.html(_.template(widgetsListTpl ,{widgets : this.collection.toJSON()}));
                 return this;
             }
         });

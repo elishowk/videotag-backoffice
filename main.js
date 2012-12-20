@@ -18,7 +18,8 @@ require.config({
         'md5': 'lib/md5-2.1.js',
         'raven': 'lib/raven-0.6.min.js',
         'app':      'videotag-backoffice/app',
-        'modules':  'videotag-backoffice/modules'
+        'modules':  'videotag-backoffice/modules',
+        'page': 'videotag/page/'
     },
     'shim': {
         'app': {

@@ -1,12 +1,12 @@
 define(
-    [ 'backbone', 'modules/base/views/main', 'modules/widget/views/widgetslist' ],
-    function(Backbone, MainView, WidgetsListView) {
+    [ 'backbone', 'modules/base/views/main', 'modules/widget/views/widgetslist', 'page/collection' ],
+    function(Backbone, MainView, WidgetsListView, PageCollection) {
 
         var app = {
             Router: null,
-            MainView: MainView,
+            MainView: new MainView(),
             initialize: function (){
-                var widgetsList = new WidgetsListView({/* Collection page ?created_by=user_id  */});
+                var widgetsList = new WidgetsListView({collection: new PageCollection() });
                 this.MainView.render(widgetsList.render(), '.widgetslist');
             }
         };

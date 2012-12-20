@@ -1,5 +1,5 @@
 define(['backbone', 'text!modules/base/templates/main.tpl'], function(Backbone, mainTpl) {
-    return new Backbone.View.extend({
+    return Backbone.View.extend({
         id: 'main',
         tagName: 'div',
         initialize: function() {
