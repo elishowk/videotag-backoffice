@@ -1,5 +1,5 @@
 define(
-    ['backbonetastypie', 'text!templates/widget.tpl'  ],
+    ['backbonetastypie', 'text!modules/widget/templates/widget.tpl'  ],
     function(Backbone, tplWidget) {
         'use strict';
         return Backbone.View.extend({

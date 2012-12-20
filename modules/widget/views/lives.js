@@ -1,5 +1,5 @@
 define(
-    ['backbonetastypie', 'text!templates/lives.tpl'/*TODO: lib timedatepicker */  ],
+    ['backbonetastypie', 'text!modules/widget/templates/lives.tpl'/*TODO: lib timedatepicker */  ],
     function(Backbone, tplLives) {
         'use strict';
         return Backbone.View.extend({

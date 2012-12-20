@@ -1,11 +1,11 @@
 define(
-    [ 'modules/baseview/main', 'modules/widget/views/widgetslist' ],
+    [ 'modules/base/views/main', 'modules/widget/views/widgetslist' ],
     function(MainView, WidgetsListView) {
 
         var app = {
             MainView: new MainView(),
             initialize: function (){
-                var widgetsList = new WidgetsListView({collection: window.Poser});
+                var widgetsList = new WidgetsListView({/* Collection page ?created_by=user_id  */});
                 this.instance.MainView.render(widgetsList.render(), '.widgetslist');
             }
         };
@@ -27,7 +27,7 @@ define(
 
             addwidget: function() {
                 require(
-                    ['view/addwidget'],
+                    ['modules/widget/views/addwidget'],
                     function (AddWidgetView) {
                         var addWidgetView = new AddWidgetView({/* Model/Collection  */});
                         app.instance.MainView
@@ -40,7 +40,7 @@ define(
             /* TODO: arguments */
             widget: function(key, value) {
                 require(
-                    ['views/widget', 'views/lives', 'views/speakers', 'views/moderators'],
+                    ['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers', 'modules/widget/views/moderators'],
                     function(WidgetView, LivesView, SpeakersView, ModeratorsView){
                         var widgetView = new WidgetView({/* Model/Collection  */});
                         var livesView = new LivesView({/* Model/Collection  */});
