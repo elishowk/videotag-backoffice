@@ -1,4 +1,4 @@
-define(['backbonetastypie', 'text!templates/user.tpl'], function(Backbone, Tpl) {
+define(['backbone', 'text!templates/user.tpl'], function(Backbone, Tpl) {
     return Backbone.View.extend({
         initialize : function() {
             this.template = _.template(Tpl);

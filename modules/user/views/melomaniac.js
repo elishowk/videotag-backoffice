@@ -1,4 +1,4 @@
-define(['backbonetastypie', 'text!templates/melomaniac.tpl'], function(Backbone, Tpl) {
+define(['backbone', 'text!templates/melomaniac.tpl'], function(Backbone, Tpl) {
 
     return Backbone.View.extend({
 

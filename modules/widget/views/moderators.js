@@ -1,5 +1,5 @@
 define(
-    ['backbonetastypie', 'text!modules/widget/templates/moderators.tpl'],
+    ['backbone', 'text!modules/widget/templates/moderators.tpl'],
     function(Backbone, tplModerators) {
         'use strict';
         /* TODO: gravatar */

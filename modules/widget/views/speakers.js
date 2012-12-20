@@ -1,5 +1,5 @@
 define(
-    ['backbonetastypie', 'text!modules/widget/templates/speakers.tpl'],
+    ['backbone', 'text!modules/widget/templates/speakers.tpl'],
     function(Backbone, tplSpeakers) {
         'use strict';
         /*TODO: gravata*/

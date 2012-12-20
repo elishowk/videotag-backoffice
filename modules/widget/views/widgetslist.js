@@ -1,5 +1,5 @@
 define(
-    ['backbonetastypie', 'text!modules/widget/templates/widgetslist.tpl'],
+    ['backbone', 'text!modules/widget/templates/widgetslist.tpl'],
     function(Backbone, widgetsListTpl) {
         return Backbone.View.extend({
             tagName: 'div',
