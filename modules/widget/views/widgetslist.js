@@ -12,6 +12,7 @@ define(
             },
             render: function() {
                 this.$el.html(_.template(widgetsListTpl ,{widgets : this.collection.toJSON()}));
+                console.log(this.$el[0]);
                 return this;
             }
         });

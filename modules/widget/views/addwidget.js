@@ -44,7 +44,7 @@ define(
                 }
             },
             render : function() {
-                this.$el.html(_.template(tplAddWidget).template({ widgets : this.collection.toJSON()}));
+                this.$el.html(_.template(tplAddWidget, { widgets : this.collection.toJSON()}));
                 return this;
             }
         });

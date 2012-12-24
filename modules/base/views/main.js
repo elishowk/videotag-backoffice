@@ -7,6 +7,10 @@ define(['backbone', 'text!modules/base/templates/main.tpl'], function(Backbone, 
             $(document.body).append(this.$el);
         },
         render: function(content, target){
+            if (content instanceof Backbone.View) {
+                content = content.$el;
+            }
+
             this.$el.find(target).append(content);
             return this;
         },

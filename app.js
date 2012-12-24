@@ -25,8 +25,6 @@ define(
             Spinner: new Spinner(opts),
             initialize: function (){
                 this.MainView= new MainView();
-                var widgetsList = new WidgetsListView({collection: new PageCollection() });
-                this.MainView.render(widgetsList.render(), '.widgetslist');
             }
         };
 
@@ -53,10 +51,12 @@ define(
                 require(
                     ['modules/widget/views/addwidget'],
                     function (AddWidgetView) {
-                        var addWidgetView = new AddWidgetView({/* Model/Collection  */});
-                        app.instance.MainView
+                        var widgetsList = new WidgetsListView({collection: new PageCollection() });
+                        var addWidgetView = new AddWidgetView({collection: new PageCollection() });
+                        app.MainView
                         .empty()
-                        .render(addWidgetView.render(), '.commonplay-row1-col1');
+                        .render(widgetsList.render(), '.widgetslist')
+                        //.render(addWidgetView.render(), '.commonplay-row1-col1');
                     }
                 );
             },
