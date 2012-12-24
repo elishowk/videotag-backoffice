@@ -14,7 +14,8 @@
          */
         var config = {
             'baseUrl': {STATIC_URL},
-            'configUrl': {CONFIG_URL},
+            'videotagApiUrl': {VIDEOTAG_API_URL},
+            'poserApiUrl': {POSER_API_URL},
         };
 
         /**

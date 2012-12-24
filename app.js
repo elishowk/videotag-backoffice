@@ -1,6 +1,6 @@
 define(
-    [ 'backbone', 'spin', 'modules/base/views/main', 'modules/widget/views/widgetslist', 'page/collection' ],
-    function(Backbone, Spinner, MainView, WidgetsListView, PageCollection) {
+    [ 'backbone', 'spin', 'modules/base/views/main'],
+    function(Backbone, Spinner, MainView) {
 
         var opts = {
             lines: 13, // The number of lines to draw
@@ -24,7 +24,7 @@ define(
             Router: null,
             Spinner: new Spinner(opts),
             initialize: function (){
-                this.MainView= new MainView();
+                this.MainView = new MainView();
             }
         };
 
@@ -45,25 +45,33 @@ define(
                  */
             },
 
-
             addwidget: function() {
+                app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/widget/views/addwidget'],
-                    function (AddWidgetView) {
-                        var widgetsList = new WidgetsListView({collection: new PageCollection() });
-                        var addWidgetView = new AddWidgetView({collection: new PageCollection() });
-                        app.MainView
-                        .empty()
-                        .render(widgetsList.render(), '.widgetslist')
-                        //.render(addWidgetView.render(), '.commonplay-row1-col1');
+                    ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist', 'page/collection'],
+                    function (AddWidgetView, WidgetsListView, PageCollection) {
+                        var pages = new PageCollection();
+                        pages.filters['username'] = 'admin';
+                        pages.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var widgetsList = new WidgetsListView({collection: pages});
+                                var addWidgetView = new AddWidgetView({collection: pages});
+                                app.MainView
+                                    .render(widgetsList.render(), '.widgetslist')
+                                    .render(addWidgetView.render(), '.commonplay-row1-col1');
+                            }.bind(this)
+                        });
                     }
                 );
             },
 
-            /* TODO: arguments */
             widget: function(key, value) {
+                app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
+
+
                 require(
                     ['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers', 'modules/widget/views/moderators'],
                     function(WidgetView, LivesView, SpeakersView, ModeratorsView){
@@ -71,7 +79,7 @@ define(
                         var livesView = new LivesView({/* Model/Collection  */});
                         var speakersView = new SpeakersView({/* Model/Collection  */});
                         var moderatorsView = new ModeratorsView({/* Model/Collection  */});
-                        app.instance.MainView
+                        app.MainView
                         .empty()
                         .render(widgetView.render(), '.commonplay-row1-col1')
                         .render(livesView.render(), '.commonplay-row2-col1')
