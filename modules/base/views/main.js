@@ -1,5 +1,4 @@
-define(['backbone', 'app','text!modules/base/templates/main.tpl'], function(Backbone, App, mainTpl) {
-    console.log(App)
+define(['backbone', 'text!modules/base/templates/main.tpl'], function(Backbone, mainTpl) {
     return Backbone.View.extend({
         id: 'main',
         tagName: 'div',
@@ -8,7 +7,6 @@ define(['backbone', 'app','text!modules/base/templates/main.tpl'], function(Back
             $(document.body).append(this.$el);
         },
         render: function(content, target){
-            App.Spinner.stop();
             this.$el.find(target).append(content);
             return this;
         },
