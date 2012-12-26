@@ -2,7 +2,7 @@
 
 <h4>Le code Javascript à importer</h4>
         <div class = 'row'>
-            <pre class = 'span5'></pre>
+            <pre class = 'span5 snippet'></pre>
         <div class = 'span3'>
                 <a href="#preview" role="button" class="btn btn-primary btn-large" id="btn-preview" data-toggle="modal">
                     Preview 

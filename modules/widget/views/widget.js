@@ -1,6 +1,6 @@
 define(
-    ['backbone', 'text!modules/widget/templates/widget.tpl'  ],
-    function(Backbone, tplWidget) {
+    ['backbone', 'text!modules/widget/templates/widget.tpl', 'text!modules/widget/templates/snippet.tpl'  ],
+    function(Backbone, tplWidget, tplSnippet) {
         'use strict';
         return Backbone.View.extend({
             tagName: 'div',
@@ -10,6 +10,9 @@ define(
             },
             render: function() {
                 this.$el.html(_.template(tplWidget, this.model.toJSON()));
+                $.get('http://localhost:9000/poser/'+ this.model.get('path'), function(data){
+                    this.$el.find('.snippet').text(_.template(tplSnippet, data));
+                }.bind(this));
                 return this;
             },
             publish: function(){

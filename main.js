@@ -22,7 +22,8 @@ require.config({
         'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
         'page': 'videotag/page/',
-        'live': 'videotag/pseudolive/'
+        'live': 'videotag/pseudolive/',
+        'user': 'videotag/user/'
     },
     'shim': {
         'app': {

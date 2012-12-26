@@ -57,8 +57,8 @@ define(
                                 var widgetsList = new WidgetsListView({collection: pages});
                                 var addWidgetView = new AddWidgetView({collection: pages});
                                 app.MainView
-                                    .render(widgetsList.render(), '.widgetslist')
-                                    .render(addWidgetView.render(), '.commonplay-row1-col1');
+                                .render(widgetsList.render(), '.widgetslist')
+                                .render(addWidgetView.render(), '.commonplay-row1-col1');
                             }.bind(this)
                         });
                     }
@@ -72,57 +72,67 @@ define(
 
                 require(
                     ['modules/widget/views/widget',
-                    'modules/widget/views/lives',
-                    'modules/widget/views/speakers',
-                    'modules/widget/views/moderators',
-                    'modules/widget/views/widgetslist',
-                    'page/collection',
-                    'live/collection'],
-                    function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection){
-
-                        var pages = new PageCollection();
-                        pages.filters['username'] = 'admin';
-                        pages.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                var widgetsList = new WidgetsListView({collection: pages});
-                                var widgetView = new WidgetView({model: pages.at(widgetId)});
-                                app.MainView
+                        'modules/widget/views/lives',
+                        'modules/widget/views/speakers',
+                        'modules/widget/views/moderators',
+                        'modules/widget/views/widgetslist',
+                        'page/collection',
+                        'live/collection',
+                        'user/collection'],
+                        function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection, UsersCollection){
+                            var widget;
+                            var pages = new PageCollection();
+                            pages.filters['username'] = 'admin';
+                            pages.fetch({
+                                success: function(){
+                                    app.Spinner.stop();
+                                    widget = pages.getById(widgetId);
+                                    var widgetsList = new WidgetsListView({collection: pages});
+                                    var widgetView = new WidgetView({model: widget});
+                                    app.MainView
                                     .render(widgetsList.render(), '.widgetslist')
                                     .render(widgetView.render(), '.commonplay-row1-col1');
-                            }.bind(this)
-                        });
 
-                        var lives = new LivesCollection();
-                        lives.filters['created_by'] = 'admin';
-                        lives.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                var livesView = new LivesView({collection: lives});
-                                app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                            }.bind(this)
-                        });
-/*
-                        var moderators = new ModeratorsCollection();
-                        moderators.filters['created_by'] = 'admin';
-                        moderators.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                var moderatorsView = new ModeratorsView({collection: moderators});
-                                app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
-                            }.bind(this)
-                        });
-                        var speakers = new SpeakersCollection();
-                        speakers.filters['created_by'] = 'admin';
-                        speakers.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                var speakersView = new SpeakersView({collection: speakers});
-                                app.MainView.render(SpeakersView.render(), '.commonplay-row2-col3');
-                            }.bind(this)
-                        });
-*/
-                    }
+
+                                    var speakers = new UsersCollection();
+                                    speakers.setIds(widget.get('application').speakers).fetch({
+                                        success: function(){
+                                            app.Spinner.stop();
+                                            var speakersView = new SpeakersView({collection: speakers});
+                                            app.MainView.render(speakersView.render(), '.commonplay-row2-col3');
+                                        }.bind(this)
+                                    });
+                                    var moderators = new UsersCollection();
+                                    moderators.setIds(widget.get('application').moderators).fetch({
+                                        success: function(){
+                                            app.Spinner.stop();
+                                            var moderatorsView = new ModeratorsView({collection: moderators});
+                                            app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
+                                        }.bind(this)
+                                    });
+                                }.bind(this)
+                            });
+
+                            var lives = new LivesCollection();
+                            lives.filters['created_by'] = 'admin';
+                            lives.fetch({
+                                success: function(){
+                                    app.Spinner.stop();
+                                    var livesView = new LivesView({collection: lives});
+                                    app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                }.bind(this)
+                            });
+                            /*
+                               var moderators = new ModeratorsCollection();
+                               moderators.filters['created_by'] = 'admin';
+                               moderators.fetch({
+                               });
+                               var speakers = new SpeakersCollection();
+                               speakers.filters['created_by'] = 'admin';
+                               speakers.fetch({
+                               });
+                               */
+                        }
                 );
             }
         });
