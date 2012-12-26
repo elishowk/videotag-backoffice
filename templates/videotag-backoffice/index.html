@@ -15,11 +15,11 @@
          * retrieve config
          */
         var config = {
-          'pageId': '{%page_id%}',
-          'baseUrl': '{%static_url%}',
-          'videotagApiUrl': '{%videotag_api_url%}',
-          'poserApiUrl': '{%poser_api_url%}',
-          'sockjsUrl': '{%sock_url%}',
+          'pageId': '{{ page.id }}',
+          'baseUrl': '{% get_static_prefix %}',
+          'videotagApiUrl': '{{ videotagApiUrl }}',
+          'poserApiUrl': '{{ poserApiUrl }}',
+          'sockjsUrl': '{{ sockjsUrl }}',
         };
 
         /**
