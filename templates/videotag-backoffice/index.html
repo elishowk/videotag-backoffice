@@ -5,6 +5,10 @@
   <head>
     <meta charset="utf-8" />
     <title>BackOffice</title>
+    <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-2.2.2/css/bootstrap.min.css"/>
+    <style>
+        body { padding-top: 60px; }
+    </style> 
   </head>
   <body>
     <script>
@@ -15,7 +19,6 @@
          * retrieve config
          */
         var config = {
-          'pageId': '{{ page.id }}',
           'baseUrl': '{% get_static_prefix %}',
           'videotagApiUrl': '{{ videotagApiUrl }}',
           'poserApiUrl': '{{ poserApiUrl }}',
@@ -29,8 +32,8 @@
         script.addEventListener('load', function () {
           require.appConfig = config;
         });
-        script.setAttribute('src', config.baseUrl + '/lib/require-2.1.2.min.js');
-        script.setAttribute('data-main', config.baseUrl + '/videotag-backoffice/main.js');
+        script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');
+        script.setAttribute('data-main', config.baseUrl + 'videotag-backoffice/main.js');
         document.head.appendChild(script);
       }).call(window);
     </script>
