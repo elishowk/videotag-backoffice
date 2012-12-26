@@ -1,3 +1,5 @@
+{% load static %}
+{% load url from future %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -13,9 +15,11 @@
          * retrieve config
          */
         var config = {
-            'baseUrl': {STATIC_URL},
-            'videotagApiUrl': {VIDEOTAG_API_URL},
-            'poserApiUrl': {POSER_API_URL},
+          'pageId': '{%page_id%}',
+          'baseUrl': '{%static_url%}',
+          'videotagApiUrl': '{%videotag_api_url%}',
+          'poserApiUrl': '{%poser_api_url%}',
+          'sockjsUrl': '{%sock_url%}',
         };
 
         /**
