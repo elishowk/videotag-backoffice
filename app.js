@@ -23,9 +23,7 @@ define(
         var app = {
             Router: null,
             Spinner: new Spinner(opts),
-            initialize: function (){
-                this.MainView = new MainView();
-            }
+            MainView: new MainView()
         };
 
 
@@ -34,7 +32,7 @@ define(
             routes: {
                 ''                    : 'dashboard',
                 'dashboard'           : 'dashboard',
-                'widget/:key/:value'  : 'widget',
+                'widget/:widgetId'    : 'widget',
                 'addwidget'           : 'addwidget'
             },
             dashboard: function() {
@@ -67,24 +65,63 @@ define(
                 );
             },
 
-            widget: function(key, value) {
+            widget: function(widgetId) {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
 
 
                 require(
-                    ['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers', 'modules/widget/views/moderators'],
-                    function(WidgetView, LivesView, SpeakersView, ModeratorsView){
-                        var widgetView = new WidgetView({/* Model/Collection  */});
-                        var livesView = new LivesView({/* Model/Collection  */});
-                        var speakersView = new SpeakersView({/* Model/Collection  */});
-                        var moderatorsView = new ModeratorsView({/* Model/Collection  */});
-                        app.MainView
-                        .empty()
-                        .render(widgetView.render(), '.commonplay-row1-col1')
-                        .render(livesView.render(), '.commonplay-row2-col1')
-                        .render(speakersView.render(), '.commonplay-row2-col2')
-                        .render(moderatorsView.render(), '.commonplay-row2-col3');
+                    ['modules/widget/views/widget',
+                    'modules/widget/views/lives',
+                    'modules/widget/views/speakers',
+                    'modules/widget/views/moderators',
+                    'modules/widget/views/widgetslist',
+                    'page/collection',
+                    'live/collection'],
+                    function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection){
+
+                        var pages = new PageCollection();
+                        pages.filters['username'] = 'admin';
+                        pages.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var widgetsList = new WidgetsListView({collection: pages});
+                                var widgetView = new WidgetView({model: pages.at(widgetId)});
+                                app.MainView
+                                    .render(widgetsList.render(), '.widgetslist')
+                                    .render(widgetView.render(), '.commonplay-row1-col1');
+                            }.bind(this)
+                        });
+
+                        var lives = new LivesCollection();
+                        lives.filters['created_by'] = 'admin';
+                        lives.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var livesView = new LivesView({collection: lives});
+                                app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                            }.bind(this)
+                        });
+/*
+                        var moderators = new ModeratorsCollection();
+                        moderators.filters['created_by'] = 'admin';
+                        moderators.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var moderatorsView = new ModeratorsView({collection: moderators});
+                                app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
+                            }.bind(this)
+                        });
+                        var speakers = new SpeakersCollection();
+                        speakers.filters['created_by'] = 'admin';
+                        speakers.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var speakersView = new SpeakersView({collection: speakers});
+                                app.MainView.render(SpeakersView.render(), '.commonplay-row2-col3');
+                            }.bind(this)
+                        });
+*/
                     }
                 );
             }

@@ -15,9 +15,9 @@ define(
                 e.preventDefault();
             },
             render : function() {
-                this.$el.html(_.template(tplLives).template({ lives : this.collection.toJSON()}));
-                this.$el.find('#datepicker').datepicker();
-                this.$el.find('#timepicker').timepicker();
+                this.$el.html(_.template(tplLives, { lives : this.collection.toJSON()}));
+                //this.$el.find('#datepicker').datepicker();
+                //this.$el.find('#timepicker').timepicker();
                 return this;
             }
         });

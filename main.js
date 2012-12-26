@@ -1,4 +1,6 @@
-/*global define*/
+/*gloiii
+* i
+* ibal define*/
 
 require.config({
     'baseUrl': require.appConfig.baseUrl,
@@ -19,7 +21,8 @@ require.config({
         'raven': 'lib/raven-0.6.min',
         'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
-        'page': 'videotag/page/'
+        'page': 'videotag/page/',
+        'live': 'videotag/pseudolive/'
     },
     'shim': {
         'app': {
@@ -37,6 +40,6 @@ require.config({
 
 define(['app', 'poser/backbone-tastypie-0.1'], function (App) {
 
-    App.initialize();
+    //App.initialize();
 });
 

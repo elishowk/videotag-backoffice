@@ -15,7 +15,8 @@ define(['backbone', 'text!modules/base/templates/main.tpl'], function(Backbone, 
             return this;
         },
         empty: function () {
-            this.$el.find('.data-div').empty();
+            this.$el.find('.data-div ').empty();
+            this.$el.find('.widgetslist ').empty();
             return this;
         }
     });

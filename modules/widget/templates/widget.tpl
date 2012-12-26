@@ -7,7 +7,7 @@
                 <a href="#preview" role="button" class="btn btn-primary btn-large" id="btn-preview" data-toggle="modal">
                     Preview 
                     </a>
-              <% if( state  == 1 ) {%>
+              <% if( published  == 1 ) {%>
                 <h4>Intéractions</h4> <span class="badge badge-success">Activé</span> 
                 <button type="button" class="btn btn-danger"  id='btn-unpublish' widget-id=<%= id %> >Désactivé</button>
                 <%}else {%>
@@ -16,7 +16,6 @@
                 <%}%>
             </div>
         </div>
-        <h4>video : <%=video %></h4>
 
         <legend>Configurez votre widget</legend>    
  

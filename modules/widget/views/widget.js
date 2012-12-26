@@ -9,7 +9,7 @@ define(
                 'click #btn-publish':'publish'
             },
             render: function() {
-                this.$el.html(_.template(tplWidget).template(this.model.toJSON));
+                this.$el.html(_.template(tplWidget, this.model.toJSON()));
                 return this;
             },
             publish: function(){
