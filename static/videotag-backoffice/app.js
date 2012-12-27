@@ -68,8 +68,6 @@ define(
             widget: function(widgetId) {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
-
-
                 require(
                     ['modules/widget/views/widget',
                         'modules/widget/views/lives',
@@ -83,7 +81,6 @@ define(
                             var widget;
                             var pages = new PageCollection();
                             pages.filters['username'] = 'admin';
-
                             pages.fetch({
                                 success: function(){
                                     app.Spinner.stop();
@@ -114,19 +111,21 @@ define(
                                         var moderatorsView = new ModeratorsView({collection: moderators});
                                         app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
                                     }
-                                    else{}
-                                    moderators.setIds(widget.get('application').moderators).fetch({
-                                        success: function(){
-                                            app.Spinner.stop();
-                                            var moderatorsView = new ModeratorsView({collection: moderators});
-                                            app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
-                                        }.bind(this)
-                                    });
+                                    else{
+                                        moderators.setIds(widget.get('application').moderators).fetch({
+                                            success: function(){
+                                                app.Spinner.stop();
+                                                var moderatorsView = new ModeratorsView({collection: moderators});
+                                                app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
+                                            }.bind(this)
+                                        });
+                                    }
                                 }.bind(this)
                             });
 
                             var lives = new LivesCollection();
                             lives.filters['created_by'] = 'admin';
+                            lives.filters['widget'] = widgetId;
                             /*TODO: filters widget Id*/
                             lives.fetch({
                                 success: function(){
