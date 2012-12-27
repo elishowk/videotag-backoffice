@@ -14,8 +14,8 @@ require.config({
         'spin': 'lib/spin-1.2.7',
         'backbone-validation': 'lib/backbone-validation-0.6.2',
         'bootstrap': 'lib/bootstrap-2.2.2',
-        'bootstrap-datepicker': 'lib/bootstrap-datepicker-2.0',
-        'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0',
+        'bootstrap-datepicker': 'lib/bootstrap-datepicker-2.0/js/bootstrap-datepicker-2.0',
+        'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0/js/bootstrap-timepicker-2.0',
         'jquery-gravatar': 'lib/jquery-gravatar-1.0.1',
         'md5': 'lib/md5-2.1',
         'raven': 'lib/raven-0.6.min',
@@ -32,7 +32,8 @@ require.config({
         'backbone': {
             'deps': [
                 'underscore',
-                'jquery'
+                'jquery',
+                'bootstrap/js/bootstrap'
             ],
             'exports': 'Backbone'
         }

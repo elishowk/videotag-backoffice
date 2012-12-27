@@ -32,7 +32,7 @@
                         <div class="control-group" id ="control-date_live">
                             <label class="control-label" for="date_live">Date: </label>                           
                             <div class="controls">
-                                <input type="text" value="02-16-2012" id="datepicker" class="input-small">
+                                <input type="text" value="2012-12-25" id="datepicker" class="input-small">
                                 <span class="help-inline"></span>
                             </div>
                         </div>

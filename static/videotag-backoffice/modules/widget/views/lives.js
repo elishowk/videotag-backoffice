@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/widget/templates/lives.tpl'/*TODO: lib timedatepicker */  ],
+    ['backbone', 'text!modules/widget/templates/lives.tpl', 'bootstrap-datepicker', 'bootstrap-timepicker' ],
     function(Backbone, tplLives) {
         'use strict';
         return Backbone.View.extend({
@@ -16,8 +16,8 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplLives, { lives : this.collection.toJSON()}));
-                //this.$el.find('#datepicker').datepicker();
-                //this.$el.find('#timepicker').timepicker();
+                this.$el.find('#datepicker').datepicker({format: 'yyyy-mm-dd'});
+                this.$el.find('#timepicker').timepicker({ showSeconds: true, showMeridian:false });
                 return this;
             }
         });
