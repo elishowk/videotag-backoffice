@@ -1,6 +1,6 @@
 define(
-    [ 'backbone', 'spin', 'modules/base/views/main'],
-    function(Backbone, Spinner, MainView) {
+    [ 'backbone', 'spin', 'modules/base/views/main', 'page/collection'],
+    function(Backbone, Spinner, MainView, PageCollection) {
 
         var opts = {
             lines: 13, // The number of lines to draw
@@ -33,7 +33,8 @@ define(
                 ''                    : 'dashboard',
                 'dashboard'           : 'dashboard',
                 'widget/:widgetId'    : 'widget',
-                'addwidget'           : 'addwidget'
+                'addwidget'           : 'addwidget',
+                'account/:userId'     : 'account'
             },
             dashboard: function() {
                 app.Spinner.spin(document.getElementById('main'));
@@ -43,12 +44,40 @@ define(
                  */
             },
 
+            account: function(userId) {
+                app.MainView.empty();
+                app.Spinner.spin(document.getElementById('main'));
+                require(
+                    ['modules/user/views/user', 'modules/widget/views/widgetslist', 'user/model'],
+                    function (UserView, WidgetsListView, UserModel) {
+                        var user = new UserModel();
+                        user.urlRoot =user.url() + userId;
+                        user.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var userView = new UserView({model: user})
+                                app.MainView.render(userView.render(), '.commonplay-row1-col1');
+                            }.bind(this)
+                        });
+                        var pages = new PageCollection();
+                        pages.filters['username'] = 'admin';
+                        pages.fetch({
+                            success: function(){
+                                var widgetsList = new WidgetsListView({collection: pages});
+                                app.MainView
+                                .render(widgetsList.render(), '.widgetslist')
+                            }.bind(this)
+                        });
+                    }
+                );
+            },
+
             addwidget: function() {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist', 'page/collection'],
-                    function (AddWidgetView, WidgetsListView, PageCollection) {
+                    ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist'],
+                    function (AddWidgetView, WidgetsListView) {
                         var pages = new PageCollection();
                         pages.filters['username'] = 'admin';
                         pages.fetch({
@@ -126,7 +155,6 @@ define(
                             var lives = new LivesCollection();
                             lives.filters['created_by'] = 'admin';
                             lives.filters['widget'] = widgetId;
-                            /*TODO: filters widget Id*/
                             lives.fetch({
                                 success: function(){
                                     app.Spinner.stop();
