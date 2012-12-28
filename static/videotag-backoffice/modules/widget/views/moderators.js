@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/widget/templates/moderators.tpl'],
+    ['backbone', 'text!modules/widget/templates/moderators.tpl', 'jquery-gravatar'],
     function(Backbone, tplModerators) {
         'use strict';
         /* TODO: gravatar */
@@ -16,10 +16,10 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplModerators, { moderators : this.collection.toJSON()}));
+                this.$el.find('.td-moderator').each( function(i){
+                    $(this).append( $.gravatar( $(this).attr('title') , {size : 20 ,secure: true, rating: 'r'}));
+                });
                 return this;
-                /* $('.td-moderator').each( function(i){
-                   $(this).append( $.gravatar( $(this).attr('title') , {size : 20 ,secure: true, rating: 'r'}));
-                   });*/
             }
         });
     }

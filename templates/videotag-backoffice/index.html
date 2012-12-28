@@ -1,5 +1,6 @@
 {% load static %}
 {% load url from future %}
+{% load uservoice %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -37,5 +38,6 @@
         document.head.appendChild(script);
       }).call(window);
     </script>
+    {% uservoice %}
   </body>
 </html>

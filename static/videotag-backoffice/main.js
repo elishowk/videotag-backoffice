@@ -37,9 +37,10 @@ require.config({
             'exports': 'Backbone'
         },
         'backbone-validation': {
-            'deps': [
-                'backbone'
-            ]
+            'deps': ['backbone']
+        },
+        'jquery-gravatar': {
+            'deps': ['md5']
         }
     }
 });
