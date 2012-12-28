@@ -20,7 +20,7 @@
          */
         var config = {
           'baseUrl': '{% get_static_prefix %}',
-          'videotagApiUrl': '{{ videotagApiUrl }}',
+          'feedsApiUrl': '{{ feedsApiUrl }}',
           'poserApiUrl': '{{ poserApiUrl }}',
           'sockjsUrl': '{{ sockjsUrl }}',
         };
@@ -33,7 +33,7 @@
           require.appConfig = config;
         });
         script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');
-        script.setAttribute('data-main', config.baseUrl + 'videotag-backoffice/main.js');
+        script.setAttribute('data-main', config.baseUrl + 'feeds-backoffice/main.js');
         document.head.appendChild(script);
       }).call(window);
     </script>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
-from videotag_poser.views import _get_app_context
+from poser.views import _get_app_context
 
 
 def root(request):
