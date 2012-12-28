@@ -1,6 +1,5 @@
-/*gloiii
-* i
-* ibal define*/
+/*glo
+* bal define*/
 
 require.config({
     'baseUrl': require.appConfig.baseUrl,
@@ -36,6 +35,11 @@ require.config({
                 'bootstrap/js/bootstrap'
             ],
             'exports': 'Backbone'
+        },
+        'backbone-validation': {
+            'deps': [
+                'backbone'
+            ]
         }
     }
 });

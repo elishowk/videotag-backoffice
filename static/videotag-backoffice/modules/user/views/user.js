@@ -1,12 +1,12 @@
 define(
-    ['backbone', 'text!modules/user/templates/user.tpl'],
+    ['backbone', 'text!modules/user/templates/user.tpl', 'backbone-validation'],
     function(Backbone, tplUser) {
         'use strict';
         return Backbone.View.extend({
             tagName: 'div',
             events: {
                 'submit form' : 'updateUser',
-                //          'keyup' : 'validate'
+                'keyup' : 'validate'
             },
             updateUser: function(e) {
                 e.preventDefault();
@@ -25,6 +25,7 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplUser,  this.model.toJSON()));
+                Backbone.Validation.bind(this)
                 return this;
             }
         });
