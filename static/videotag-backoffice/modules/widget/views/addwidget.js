@@ -1,11 +1,11 @@
 define(
-    ['backbone', 'text!modules/widget/templates/addwidget.tpl'  ],
+    ['backbone', 'text!modules/widget/templates/addwidget.tpl', 'backbone-validation'],
     function(Backbone, tplAddWidget) {
         'use strict';
         return Backbone.View.extend({
             tagName: 'div',
             events : {
-                //'keyup': 'validate',
+                'keyup': 'validate',
                 'keyup #url': 'checkvideo',
                 'click #btn-creation': 'addWidget'
             },
@@ -45,6 +45,7 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplAddWidget, { widgets : this.collection.toJSON()}));
+                Backbone.Validation.bind(this);
                 return this;
             }
         });

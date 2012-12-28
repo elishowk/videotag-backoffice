@@ -36,6 +36,9 @@ require.config({
             ],
             'exports': 'Backbone'
         },
+        'bootstrap': {
+            'deps': ['jquery']
+        },
         'backbone-validation': {
             'deps': ['backbone']
         },

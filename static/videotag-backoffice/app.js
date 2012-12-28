@@ -84,7 +84,7 @@ define(
                             success: function(){
                                 app.Spinner.stop();
                                 var widgetsList = new WidgetsListView({collection: pages});
-                                var addWidgetView = new AddWidgetView({collection: pages});
+                                var addWidgetView = new AddWidgetView({collection: pages, model: pages.at(0)});
                                 app.MainView
                                 .render(widgetsList.render(), '.widgetslist')
                                 .render(addWidgetView.render(), '.commonplay-row1-col1');

@@ -25,7 +25,7 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplUser,  this.model.toJSON()));
-                Backbone.Validation.bind(this)
+                Backbone.Validation.bind(this);
                 return this;
             }
         });
