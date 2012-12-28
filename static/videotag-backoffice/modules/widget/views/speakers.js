@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/widget/templates/speakers.tpl'],
+    ['backbone', 'text!modules/widget/templates/speakers.tpl', 'jquery-gravatar'],
     function(Backbone, tplSpeakers) {
         'use strict';
         /*TODO: gravata*/
@@ -20,15 +20,15 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplSpeakers, { speakers : this.collection.toJSON()}));
+                this.$el.find('.td-speaker').each( function(i){
+                    $(this).append( $.gravatar( $(this).attr('title') , {size : 20 ,secure: true, rating: 'r'}) );
+                });
                 return  this;
-                /* $('.td-speaker').each( function(i){
-                   $(this).append( $.gravatar( $(this).attr('title') , {size : 20 ,secure: true, rating: 'r'}) );
-                   });
-                   $('button[speaker-id]').each(function(i){
-                   $(this).click(function(){
-                   this.collection.remove(this.collection.get($(this).attr('speaker-id')));
-                   });
-                   });*/
+                $('button[speaker-id]').each(function(i){
+                    $(this).click(function(){
+                        this.collection.remove(this.collection.get($(this).attr('speaker-id')));
+                    });
+                });
             }
         });
     }

@@ -9,9 +9,7 @@
             <a class="brand" href="#dashboard">CommOnPlay</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Features</a></li>
-                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#account/2">Account</a></li>
                 </ul>
                 <div class= "span2 pull-right persona">
                     <button class= 'btn login'>SignUp</button>

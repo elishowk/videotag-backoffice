@@ -3,15 +3,17 @@
     <table class="table table-condensed">
         <thead>
             <tr>
-                <th>Titre</th>
-                <th>Date - Heure</th>
+                <th>Date</th>
+                <th>Heure</th>
             </tr>
         </thead>
         <tbody>
             <% _.each(lives, function(live) { %>
+            <% var date = live.start.split('T')[0]; var time = live.start.split('T')[1]; %>
             <tr>
-                <td><%= live.start%>
-                <td><button  id="btn-dellive" class="close">&times;</button> </td>
+                <td><%= date %></td>
+                <td><%= time %></td>
+                <td><button  id="btn-dellive" class="close">&times;</button></td>
             </tr>
             <% }); %>
         </tbody>
@@ -32,7 +34,7 @@
                         <div class="control-group" id ="control-date_live">
                             <label class="control-label" for="date_live">Date: </label>                           
                             <div class="controls">
-                                <input type="text" value="02-16-2012" id="datepicker" class="input-small">
+                                <input type="text" value="2012-12-25" id="datepicker" class="input-small">
                                 <span class="help-inline"></span>
                             </div>
                         </div>

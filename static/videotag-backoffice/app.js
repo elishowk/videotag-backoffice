@@ -1,6 +1,6 @@
 define(
-    [ 'backbone', 'spin', 'modules/base/views/main'],
-    function(Backbone, Spinner, MainView) {
+    [ 'backbone', 'spin', 'modules/base/views/main', 'page/collection'],
+    function(Backbone, Spinner, MainView, PageCollection) {
 
         var opts = {
             lines: 13, // The number of lines to draw
@@ -33,7 +33,8 @@ define(
                 ''                    : 'dashboard',
                 'dashboard'           : 'dashboard',
                 'widget/:widgetId'    : 'widget',
-                'addwidget'           : 'addwidget'
+                'addwidget'           : 'addwidget',
+                'account/:userId'     : 'account'
             },
             dashboard: function() {
                 app.Spinner.spin(document.getElementById('main'));
@@ -43,19 +44,47 @@ define(
                  */
             },
 
+            account: function(userId) {
+                app.MainView.empty();
+                app.Spinner.spin(document.getElementById('main'));
+                require(
+                    ['modules/user/views/user', 'modules/widget/views/widgetslist', 'user/model'],
+                    function (UserView, WidgetsListView, UserModel) {
+                        var user = new UserModel();
+                        user.urlRoot =user.url() + userId;
+                        user.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var userView = new UserView({model: user})
+                                app.MainView.render(userView.render(), '.commonplay-row1-col1');
+                            }.bind(this)
+                        });
+                        var pages = new PageCollection();
+                        pages.filters['username'] = 'admin';
+                        pages.fetch({
+                            success: function(){
+                                var widgetsList = new WidgetsListView({collection: pages});
+                                app.MainView
+                                .render(widgetsList.render(), '.widgetslist')
+                            }.bind(this)
+                        });
+                    }
+                );
+            },
+
             addwidget: function() {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist', 'page/collection'],
-                    function (AddWidgetView, WidgetsListView, PageCollection) {
+                    ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist'],
+                    function (AddWidgetView, WidgetsListView) {
                         var pages = new PageCollection();
                         pages.filters['username'] = 'admin';
                         pages.fetch({
                             success: function(){
                                 app.Spinner.stop();
                                 var widgetsList = new WidgetsListView({collection: pages});
-                                var addWidgetView = new AddWidgetView({collection: pages});
+                                var addWidgetView = new AddWidgetView({collection: pages, model: pages.at(0)});
                                 app.MainView
                                 .render(widgetsList.render(), '.widgetslist')
                                 .render(addWidgetView.render(), '.commonplay-row1-col1');
@@ -68,8 +97,6 @@ define(
             widget: function(widgetId) {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
-
-
                 require(
                     ['modules/widget/views/widget',
                         'modules/widget/views/lives',
@@ -93,28 +120,41 @@ define(
                                     .render(widgetsList.render(), '.widgetslist')
                                     .render(widgetView.render(), '.commonplay-row1-col1');
 
-
                                     var speakers = new UsersCollection();
-                                    speakers.setIds(widget.get('application').speakers).fetch({
-                                        success: function(){
-                                            app.Spinner.stop();
-                                            var speakersView = new SpeakersView({collection: speakers});
-                                            app.MainView.render(speakersView.render(), '.commonplay-row2-col3');
-                                        }.bind(this)
-                                    });
+                                    if (widget.get('application').speakers.length < 1){
+                                        var speakersView = new SpeakersView({collection: speakers});
+                                        app.MainView.render(speakersView.render(), '.commonplay-row2-col3');
+                                    }
+                                    else{
+                                        speakers.setIds(widget.get('application').speakers).fetch({
+                                            success: function(){
+                                                app.Spinner.stop();
+                                                var speakersView = new SpeakersView({collection: speakers});
+                                                app.MainView.render(speakersView.render(), '.commonplay-row2-col3');
+                                            }.bind(this)
+                                        });
+                                    }
+
                                     var moderators = new UsersCollection();
-                                    moderators.setIds(widget.get('application').moderators).fetch({
-                                        success: function(){
-                                            app.Spinner.stop();
-                                            var moderatorsView = new ModeratorsView({collection: moderators});
-                                            app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
-                                        }.bind(this)
-                                    });
+                                    if(widget.get('application').moderators.length < 1){
+                                        var moderatorsView = new ModeratorsView({collection: moderators});
+                                        app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
+                                    }
+                                    else{
+                                        moderators.setIds(widget.get('application').moderators).fetch({
+                                            success: function(){
+                                                app.Spinner.stop();
+                                                var moderatorsView = new ModeratorsView({collection: moderators});
+                                                app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
+                                            }.bind(this)
+                                        });
+                                    }
                                 }.bind(this)
                             });
 
                             var lives = new LivesCollection();
                             lives.filters['created_by'] = 'admin';
+                            lives.filters['widget'] = widgetId;
                             lives.fetch({
                                 success: function(){
                                     app.Spinner.stop();
@@ -122,16 +162,6 @@ define(
                                     app.MainView.render(livesView.render(), '.commonplay-row2-col1');
                                 }.bind(this)
                             });
-                            /*
-                               var moderators = new ModeratorsCollection();
-                               moderators.filters['created_by'] = 'admin';
-                               moderators.fetch({
-                               });
-                               var speakers = new SpeakersCollection();
-                               speakers.filters['created_by'] = 'admin';
-                               speakers.fetch({
-                               });
-                               */
                         }
                 );
             }

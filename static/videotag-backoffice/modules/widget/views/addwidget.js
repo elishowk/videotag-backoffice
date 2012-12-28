@@ -1,11 +1,11 @@
 define(
-    ['backbone', 'text!modules/widget/templates/addwidget.tpl'  ],
+    ['backbone', 'text!modules/widget/templates/addwidget.tpl', 'backbone-validation'],
     function(Backbone, tplAddWidget) {
         'use strict';
         return Backbone.View.extend({
             tagName: 'div',
             events : {
-                //'keyup': 'validate',
+                'keyup': 'validate',
                 'keyup #url': 'checkvideo',
                 'click #btn-creation': 'addWidget'
             },
@@ -32,9 +32,9 @@ define(
                     else
                         id = tmpidyoutube;
                     this.$('.modal-body').html('<iframe id="ytplayer" type="text/html" width="450" height="253.125" src="https://www.youtube.com/embed/'+id+'"frameborder="0" >');
-                    this.$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+id+'?v=2&alt=json', function(data) {
+                    $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+id+'?v=2&alt=json', function(data) {
                         this.$('#title').val(data.entry.title.$t);
-                    });
+                    }.bind(this));
                     this.$('#type').addClass('alert-success');
                     this.$('#type').text('La vidéo à bien été reconnue comme appartenant à Youtube');
                 }
@@ -45,6 +45,7 @@ define(
             },
             render : function() {
                 this.$el.html(_.template(tplAddWidget, { widgets : this.collection.toJSON()}));
+                Backbone.Validation.bind(this);
                 return this;
             }
         });
