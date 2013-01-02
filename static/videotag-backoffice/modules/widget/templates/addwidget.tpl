@@ -10,7 +10,16 @@
                 <input type="text" class="url "id="url">
                 <span class="help-inline"></span>
             </div>
-        </div>   
+        </div>
+
+        <div class="control-group" id ="control-permalink">
+            <label class="control-label" for="permalink">Permalien: </label>                            
+            <div class="controls">
+                <input type="text" class="url "id="permalink">
+                <span class="help-inline"></span>
+            </div>
+        </div>
+
 
         <div class="control-group" id ="control-title">
             <label class="control-label" for="title">Titre: </label>                            

@@ -108,7 +108,7 @@ define(
                         'user/collection'],
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection, UsersCollection){
                             var pages = new PageCollection();
-                            pages.filters['username'] = 'admin';
+                            pages.filters['created_by'] = 'toto';
                             pages.fetch({
                                 success: function(){
                                     app.Spinner.stop();
