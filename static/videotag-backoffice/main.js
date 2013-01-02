@@ -28,6 +28,9 @@ require.config({
         'app': {
             'deps': ['backbone']
         },
+        'bootstrap/js/bootstrap': {
+            'deps': ['jquery']
+        },
         'backbone': {
             'deps': [
                 'underscore',
@@ -35,9 +38,6 @@ require.config({
                 'bootstrap/js/bootstrap'
             ],
             'exports': 'Backbone'
-        },
-        'bootstrap': {
-            'deps': ['jquery']
         },
         'backbone-validation': {
             'deps': ['backbone']
