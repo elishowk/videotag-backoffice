@@ -1,2 +1,8 @@
 index.html
-
+.DS_Store
+__init__.pyc
+models.pyc
+static/.DS_Store
+static/videotag-backoffice/.DS_Store
+urls.pyc
+views.pyc
