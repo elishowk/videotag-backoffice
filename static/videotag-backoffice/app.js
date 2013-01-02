@@ -107,49 +107,24 @@ define(
                         'live/collection',
                         'user/collection'],
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection, UsersCollection){
-                            var widget;
                             var pages = new PageCollection();
                             pages.filters['username'] = 'admin';
                             pages.fetch({
                                 success: function(){
                                     app.Spinner.stop();
-                                    widget = pages.getById(widgetId);
                                     var widgetsList = new WidgetsListView({collection: pages});
+                                    var widget = pages.getById(widgetId);
                                     var widgetView = new WidgetView({model: widget});
+                                    var speakers = new UsersCollection(widget.get('speakers'));
+                                    var speakersView = new SpeakersView({collection: speakers});
+                                    var moderators = new UsersCollection(widget.get('moderators'));
+                                    var moderatorsView = new ModeratorsView({collection: moderators});
                                     app.MainView
-                                    .render(widgetsList.render(), '.widgetslist')
-                                    .render(widgetView.render(), '.commonplay-row1-col1');
-
-                                    var speakers = new UsersCollection();
-                                    if (widget.get('application').speakers.length < 1){
-                                        var speakersView = new SpeakersView({collection: speakers});
-                                        app.MainView.render(speakersView.render(), '.commonplay-row2-col3');
-                                    }
-                                    else{
-                                        speakers.setIds(widget.get('application').speakers).fetch({
-                                            success: function(){
-                                                app.Spinner.stop();
-                                                var speakersView = new SpeakersView({collection: speakers});
-                                                app.MainView.render(speakersView.render(), '.commonplay-row2-col3');
-                                            }.bind(this)
-                                        });
-                                    }
-
-                                    var moderators = new UsersCollection();
-                                    if(widget.get('application').moderators.length < 1){
-                                        var moderatorsView = new ModeratorsView({collection: moderators});
-                                        app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
-                                    }
-                                    else{
-                                        moderators.setIds(widget.get('application').moderators).fetch({
-                                            success: function(){
-                                                app.Spinner.stop();
-                                                var moderatorsView = new ModeratorsView({collection: moderators});
-                                                app.MainView.render(moderatorsView.render(), '.commonplay-row2-col2');
-                                            }.bind(this)
-                                        });
-                                    }
-                                }.bind(this)
+                                        .render(widgetsList.render(), '.widgetslist')
+                                        .render(widgetView.render(), '.commonplay-row1-col1')
+                                        .render(speakersView.render(), '.commonplay-row2-col3')
+                                        .render(moderatorsView.render(), '.commonplay-row2-col2');
+                                }
                             });
 
                             var lives = new LivesCollection();
@@ -157,7 +132,6 @@ define(
                             lives.filters['widget'] = widgetId;
                             lives.fetch({
                                 success: function(){
-                                    app.Spinner.stop();
                                     var livesView = new LivesView({collection: lives});
                                     app.MainView.render(livesView.render(), '.commonplay-row2-col1');
                                 }.bind(this)
