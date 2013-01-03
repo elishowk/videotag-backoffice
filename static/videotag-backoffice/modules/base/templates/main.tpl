@@ -11,8 +11,7 @@
 <ul class="nav">
 <li><a href="#account/2">Account</a></li>
 </ul>
-<div class= "span2 pull-right persona">
-<button class= 'btn login'>SignUp</button>
+<div class= "span2 pull-right login">
 </div>
 </div><!--/.nav-collapse -->
 </div>

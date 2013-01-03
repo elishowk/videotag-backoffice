@@ -14,9 +14,9 @@ define(
                 this.collection.filters= null;
                 this.collection.add({
                     title: this.$('#title').val(),
-                    apphook: 'Videotag',
+                    video: this.$('#url').val(),
+                    permalink: this.$('#permalink').val(),
                     published: true,
-                    created_by: 'admin'
                 });
             },
 

@@ -1,6 +1,6 @@
 define(
-    [ 'backbone', 'spin', 'modules/base/views/main', 'page/collection'],
-    function(Backbone, Spinner, MainView, PageCollection) {
+    [ 'backbone', 'spin', 'modules/base/views/main'],
+    function(Backbone, Spinner, MainView) {
 
         var opts = {
             lines: 13, // The number of lines to draw
@@ -23,10 +23,23 @@ define(
         var app = {
             Router: null,
             Spinner: new Spinner(opts),
-            MainView: new MainView()
+            MainView: new MainView(),
+            User: undefined
         };
 
 
+        function routine(){
+
+            if (app.User === undefined)
+                app.Router.navigate("addwidget", {trigger: true});
+            else
+                require(
+                    ['modules/user/views/user', 'modules/widget/views/widgetslist', 'user/model', 'page/collection'],
+                function (UserView, WidgetsListView, UserModel, PageCollection) {
+
+                }
+                );
+        }
 
         app.Router = Backbone.Router.extend({
             routes: {
@@ -34,17 +47,16 @@ define(
                 'dashboard'           : 'dashboard',
                 'widget/:widgetId'    : 'widget',
                 'addwidget'           : 'addwidget',
-                'account/:userId'     : 'account'
+                'account'     : 'account'
             },
-            dashboard: function() {
-                app.Spinner.spin(document.getElementById('main'));
+            dashboard: _.wrap(function() {
                 /**
                  * Test range of Collection
                  * If > 0 load widget route
                  */
-            },
+            },routine),
 
-            account: function(userId) {
+            account: _.wrap(function(userId) {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
@@ -70,7 +82,7 @@ define(
                         });
                     }
                 );
-            },
+            }, routine),
 
             addwidget: function() {
                 app.MainView.empty();
@@ -79,6 +91,9 @@ define(
                     ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist'],
                     function (AddWidgetView, WidgetsListView) {
                         var pages = new PageCollection();
+                        pages.on('add', function(page){
+                            page.save();
+                        });
                         pages.filters['username'] = 'admin';
                         pages.fetch({
                             success: function(){
@@ -108,7 +123,7 @@ define(
                         'user/collection'],
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection, UsersCollection){
                             var pages = new PageCollection();
-                            pages.filters['created_by'] = 'toto';
+                            pages.filters['created_by'] = '0';
                             pages.fetch({
                                 success: function(){
                                     app.Spinner.stop();
@@ -120,10 +135,10 @@ define(
                                     var moderators = new UsersCollection(widget.get('moderators'));
                                     var moderatorsView = new ModeratorsView({collection: moderators});
                                     app.MainView
-                                        .render(widgetsList.render(), '.widgetslist')
-                                        .render(widgetView.render(), '.commonplay-row1-col1')
-                                        .render(speakersView.render(), '.commonplay-row2-col3')
-                                        .render(moderatorsView.render(), '.commonplay-row2-col2');
+                                    .render(widgetsList.render(), '.widgetslist')
+                                    .render(widgetView.render(), '.commonplay-row1-col1')
+                                    .render(speakersView.render(), '.commonplay-row2-col3')
+                                    .render(moderatorsView.render(), '.commonplay-row2-col2');
                                 }
                             });
 
