@@ -31,7 +31,7 @@ define(
         function routine(){
 
             if (app.User === undefined)
-                app.Router.navigate("addwidget", {trigger: true});
+                app.Router.navigate("signin", {trigger: true});
             else
                 require(
                     ['modules/user/views/user', 'modules/widget/views/widgetslist', 'user/model', 'page/collection'],
@@ -47,7 +47,19 @@ define(
                 'dashboard'           : 'dashboard',
                 'widget/:widgetId'    : 'widget',
                 'addwidget'           : 'addwidget',
-                'account'     : 'account'
+                'account'     : 'account',
+                'signin': 'signin',
+                'signout': 'signout'
+            },
+
+            signin: function(){
+                require(
+                    ['modules/user/views/signin'],
+                    function(SigninView){
+                        app.MainView.empty();
+
+                    }
+                );
             },
             dashboard: _.wrap(function() {
                 /**
