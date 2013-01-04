@@ -5,33 +5,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
     <meta charset="utf-8" />
-    <title>BackOffice</title>
+    <title>{% block head_title %}CommonPlay{% endblock %}</title>
     <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-2.2.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-timepicker-2.0/compiled/timepicker.css"/>
     <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-datepicker-2.0/css/datepicker.css"/>
+    <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-timepicker-2.0/compiled/timepicker.css"/>
     <link rel="stylesheet" href="{% get_static_prefix %}lib/css/backoffice.css"/>
-    </head>
-    <body>
-        <script>
-            (function () {
-                'use strict';
+  </head>
+  <body>
+  {% block body %}{% endblock %}
+    <script>
+      (function () {
+       'use strict';
 
-                /**
-                * retrieve config
-                */
-                var config = {
-                'baseUrl': '{% get_static_prefix %}',
-                'feedsApiUrl': '{{ feedsApiUrl }}',
-                'poserApiUrl': '{{ poserApiUrl }}',
-                'sockjsUrl': '{{ sockjsUrl }}',
-                };
-
-                /**
-                * requirejs
-                */
-                var script = document.createElement('script');
-                script.addEventListener('load', function () {
-                require.appConfig = config;
+       /**
+         * retrieve config
+         */
+        var config = {
+          'baseUrl': '{% get_static_prefix %}',
+          'feedsApiUrl': '{{ feedsApiUrl }}',
+          'poserApiUrl': '{{ poserApiUrl }}',
+          'sockjsUrl': '{{ sockjsUrl }}',
+          'loginUrl': '{% url 'account_login' %}',
+          'logoutUrl': '{% url 'account_logout' %}',
+          'signupUrl': '{% url 'account_signup' %}',
+          'passwordResetUrl': '{% url 'account_password_reset' %}',
+          'passwordChangeUrl': '{% url 'account_password' %}',
+          'accountSettingsUrl': '{% url 'account_settings' %}',
+          'accountDeleteUrl': '{% url 'account_delete' %}',
+        };
 
                 });
                 script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');
