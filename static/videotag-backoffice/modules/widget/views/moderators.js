@@ -13,6 +13,7 @@ define(
             },
             addmoderator : function(e) {
                 e.preventDefault();
+                this.collection.add({email : this.$('#email-moderator').val() });
             },
             render : function() {
                 this.$el.html(_.template(tplModerators, { moderators : this.collection.toJSON()}));
