@@ -39,6 +39,13 @@
         var script = document.createElement('script');
         script.addEventListener('load', function () {
           require.appConfig = config;
+          require.appUser = {
+            isAuthenticated: '{% request.user.is_authenticated %}',
+            id: '{% request.user.id %}',
+            username: '{% request.user.username %}',
+            email: '{% request.user.email %}',
+            is_anonymous: '{% request.user.is_anonymous %}',
+          };
         });
         script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');
         script.setAttribute('data-main', config.baseUrl + 'videotag-backoffice/main.js');
