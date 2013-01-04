@@ -10,6 +10,7 @@ define(
             },
             addlive : function(e) {
                 e.preventDefault();
+                this.collection.add({start : this.$('#datepicker').val()+ 'T'+ this.$('#timepicker').val() });
             },
             dellive : function(e) {
                 e.preventDefault();

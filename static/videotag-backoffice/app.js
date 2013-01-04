@@ -27,7 +27,7 @@ define(
             UserId: '0',
             UserName: 'admin',
             Routine : function(){
-                if (app.UserId === undefined)
+                if (require.user === undefined)
                     app.Router.navigate("signin", {trigger: true});
                 else{
                     require(
@@ -49,7 +49,6 @@ define(
 
         app.Router = Backbone.Router.extend({
             routes: {
-                ''                    : 'dashboard',
                 'dashboard'           : 'dashboard',
                 'widget/:pageId'    : 'widget',
                 'addwidget'           : 'addwidget',
@@ -132,7 +131,6 @@ define(
                         'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
                             var  page = new PageModel({id: pageId });
-                            var lives = new LivesCollection();
                             page.fetch({
                                 success: function(){
                                     app.Spinner.stop();
@@ -141,7 +139,6 @@ define(
                                     var speakers = new UsersCollection(page.get('speakers'));
                                     speakers.on('add', function(speaker){
                                         page.get('speakers').push(speaker.get('email'));
-                                        page.set('speakers', page.get('speakers'));
                                         page.save();
                                     });
                                     var speakersView = new SpeakersView({collection: speakers});
@@ -153,6 +150,11 @@ define(
                                     .render(speakersView.render(), '.commonplay-row2-col3')
                                     .render(moderatorsView.render(), '.commonplay-row2-col2');
                                 }
+                            });
+
+                            var lives = new LivesCollection();
+                            lives.on('add', function(live){
+                                live.save({ page: page.get('ressource_uri')});
                             });
                             lives.filters['page'] = pageId;
                             lives.fetch({
