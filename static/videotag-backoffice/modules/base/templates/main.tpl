@@ -9,7 +9,7 @@
 <a class="brand" href="#dashboard">CommOnPlay</a>
 <div class="nav-collapse collapse">
 <ul class="nav">
-<li><a href="#account/2">Account</a></li>
+<li><a href="#account">Account</a></li>
 </ul>
 <div class= "span2 pull-right login">
 </div>

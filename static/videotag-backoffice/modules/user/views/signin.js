@@ -1,14 +1,14 @@
 define(
-    ['backbone', 'text!modules/widget/templates/signin.tpl'],
-    function(Backbone, tplSignin) {
+    ['backbone', 'text!modules/user/templates/signin.tpl'],
+    function(Backbone, tplSignin, App, UserModel) {
         'use strict';
         return Backbone.View.extend({
-            tagName: 'div',
-            events : {
-               'click #btn-login' : 'login'
+            initialize: function(refuser ){
+                this.refuser= refuser;
             },
+            tagName: 'div',
             render : function() {
-                this.$el.html(_.template(tplSignin}));
+                this.$el.html(_.template(tplSignin));
                 return this;
             }
         });

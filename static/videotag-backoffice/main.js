@@ -20,9 +20,9 @@ require.config({
         'raven': 'lib/raven-0.6.min',
         'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
-        'page': 'videotag/page/',
-        'live': 'videotag/pseudolive/',
-        'user': 'videotag/user/'
+        'page': 'videotag/page',
+        'live': 'videotag/pseudolive',
+        'user': 'videotag/user'
     },
     'shim': {
         'app': {

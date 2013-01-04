@@ -24,152 +24,144 @@ define(
             Router: null,
             Spinner: new Spinner(opts),
             MainView: new MainView(),
-            User: undefined
-        };
-
-
-        function routine(){
-
-            if (app.User === undefined)
-                app.Router.navigate("signin", {trigger: true});
-            else
-                require(
-                    ['modules/user/views/user', 'modules/widget/views/widgetslist', 'user/model', 'page/collection'],
-                function (UserView, WidgetsListView, UserModel, PageCollection) {
-
+            UserId: '0',
+            UserName: 'admin',
+            Routine : function(){
+                if (app.UserId === undefined)
+                    app.Router.navigate("signin", {trigger: true});
+                else{
+                    require(
+                        [ 'modules/widget/views/widgetslist', 'page/collection'],
+                        function (WidgetsListView, PageCollection) {
+                            var pages = new PageCollection();
+                            pages.filters['created_by'] = app.UserId;
+                            pages.fetch({
+                                success: function(){
+                                    var widgetsList = new WidgetsListView({collection: pages});
+                                    app.MainView.render(widgetsList.render(), '.widgetslist');
+                                }
+                            });
+                        }
+                    );
                 }
-                );
-        }
+            }
+        };
 
         app.Router = Backbone.Router.extend({
             routes: {
                 ''                    : 'dashboard',
                 'dashboard'           : 'dashboard',
-                'widget/:widgetId'    : 'widget',
+                'widget/:pageId'    : 'widget',
                 'addwidget'           : 'addwidget',
                 'account'     : 'account',
                 'signin': 'signin',
                 'signout': 'signout'
             },
-
-            signin: function(){
-                require(
-                    ['modules/user/views/signin'],
-                    function(SigninView){
-                        app.MainView.empty();
-
-                    }
-                );
-            },
-            dashboard: _.wrap(function() {
+            dashboard: function() {
                 /**
                  * Test range of Collection
                  * If > 0 load widget route
                  */
-            },routine),
+            },
 
-            account: _.wrap(function(userId) {
+            account: function() {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/user/views/user', 'modules/widget/views/widgetslist', 'user/model'],
-                    function (UserView, WidgetsListView, UserModel) {
+                    ['modules/user/views/user',  'user/model'],
+                    function (UserView, UserModel) {
                         var user = new UserModel();
-                        user.urlRoot =user.url() + userId;
+                        user.urlRoot = user.url() + app.UserId;
                         user.fetch({
                             success: function(){
                                 app.Spinner.stop();
+                                app.Routine();
                                 var userView = new UserView({model: user})
                                 app.MainView.render(userView.render(), '.commonplay-row1-col1');
-                            }.bind(this)
-                        });
-                        var pages = new PageCollection();
-                        pages.filters['username'] = 'admin';
-                        pages.fetch({
-                            success: function(){
-                                var widgetsList = new WidgetsListView({collection: pages});
-                                app.MainView
-                                .render(widgetsList.render(), '.widgetslist')
-                            }.bind(this)
+                            }
                         });
                     }
                 );
-            }, routine),
+            },
 
             addwidget: function() {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/widget/views/addwidget', 'modules/widget/views/widgetslist'],
-                    function (AddWidgetView, WidgetsListView) {
+                    ['modules/widget/views/addwidget', 'page/collection'],
+                    function (AddWidgetView, PageCollection) {
                         var pages = new PageCollection();
                         pages.on('add', function(page){
-                            page.save();
+                            page.save({
+                                success: function(){
+                                    app.Router.navigate("widget/" + page.get('id'), {trigger: true});
+                                }
+                            });
                         });
-                        pages.filters['username'] = 'admin';
+                        pages.filters['username'] = app.UserName;
                         pages.fetch({
                             success: function(){
                                 app.Spinner.stop();
-                                var widgetsList = new WidgetsListView({collection: pages});
+                                app.Routine();
                                 var addWidgetView = new AddWidgetView({collection: pages, model: pages.at(0)});
-                                app.MainView
-                                .render(widgetsList.render(), '.widgetslist')
-                                .render(addWidgetView.render(), '.commonplay-row1-col1');
+                                app.MainView.render(addWidgetView.render(), '.commonplay-row1-col1');
                             }.bind(this)
                         });
                     }
                 );
             },
 
-            widget: function(widgetId) {
+            signin: function(){
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/widget/views/widget',
-                        'modules/widget/views/lives',
-                        'modules/widget/views/speakers',
-                        'modules/widget/views/moderators',
-                        'modules/widget/views/widgetslist',
-                        'page/collection',
-                        'live/collection',
-                        'user/collection'],
-                        function(WidgetView, LivesView, SpeakersView, ModeratorsView, WidgetsListView, PageCollection, LivesCollection, UsersCollection){
-                            var pages = new PageCollection();
-                            pages.filters['created_by'] = '0';
-                            pages.fetch({
-                                success: function(){
-                                    app.Spinner.stop();
-                                    var widgetsList = new WidgetsListView({collection: pages});
-                                    var widget = pages.getById(widgetId);
-                                    var widgetView = new WidgetView({model: widget});
-                                    var speakers = new UsersCollection(widget.get('speakers'));
-                                    var speakersView = new SpeakersView({collection: speakers});
-                                    var moderators = new UsersCollection(widget.get('moderators'));
-                                    var moderatorsView = new ModeratorsView({collection: moderators});
-                                    app.MainView
-                                    .render(widgetsList.render(), '.widgetslist')
-                                    .render(widgetView.render(), '.commonplay-row1-col1')
-                                    .render(speakersView.render(), '.commonplay-row2-col3')
-                                    .render(moderatorsView.render(), '.commonplay-row2-col2');
-                                }
-                            });
+                    ['modules/user/views/signin', 'user/model'],
+                function(SigninView, UserModel){
+                    app.Spinner.stop();
+                    app.Routine();
+                    var signinView = new SigninView( app.User );
+                    app.MainView.empty();
+                    app.MainView.render(signinView.render(), '.commonplay-row1-col1');
+                });
+            },
 
-                            var lives = new LivesCollection();
-                            lives.filters['created_by'] = 'admin';
-                            lives.filters['widget'] = widgetId;
-                            lives.fetch({
-                                success: function(){
-                                    var livesView = new LivesView({collection: lives});
-                                    app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                }.bind(this)
-                            });
+            widget: function(pageId) {
+                app.MainView.empty();
+                app.Spinner.spin(document.getElementById('main'));
+                require(['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers',
+                    'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
+                function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
+                    var  page = new PageModel();
+                    var lives = new LivesCollection();
+                    page.urlRoot = page.url() + pageId;
+                    page.fetch({
+                        success: function(){
+                            app.Spinner.stop();
+                            app.Routine();
+                            var widgetView = new WidgetView({model: page});
+                            var speakersView = new SpeakersView({collection: speakers});
+                            var moderatorsView = new ModeratorsView({collection: moderators});
+                            var speakers = new UsersCollection(page.get('speakers'));
+                            var moderators = new UsersCollection(page.get('moderators'));
+                            app.MainView
+                            .render(widgetView.render(), '.commonplay-row1-col1')
+                            .render(speakersView.render(), '.commonplay-row2-col3')
+                            .render(moderatorsView.render(), '.commonplay-row2-col2');
                         }
-                );
+                    });
+                    lives.filters['page'] = pageId;
+                    lives.fetch({
+                        success: function(){
+                            var livesView = new LivesView({collection: lives});
+                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                        }
+                    });
+                });
             }
         });
 
-        app.Router = new app.Router();
-        Backbone.history.start(/*{pushState: true}*/);
-        return app;
-    }
-);
+            app.Router = new app.Router();
+            Backbone.history.start(/*{pushState: true}*/);
+            return app;
+        }
+                       );
