@@ -27,7 +27,7 @@ define(
             UserId: '0',
             UserName: 'admin',
             Routine : function(){
-                if (app.UserId === undefined)
+                if (require.user === undefined)
                     app.Router.navigate("signin", {trigger: true});
                 else{
                     require(
@@ -49,7 +49,6 @@ define(
 
         app.Router = Backbone.Router.extend({
             routes: {
-                ''                    : 'dashboard',
                 'dashboard'           : 'dashboard',
                 'widget/:pageId'    : 'widget',
                 'addwidget'           : 'addwidget',
@@ -116,52 +115,60 @@ define(
                 app.Spinner.spin(document.getElementById('main'));
                 require(
                     ['modules/user/views/signin', 'user/model'],
-                function(SigninView, UserModel){
-                    app.Spinner.stop();
-                    app.Routine();
-                    var signinView = new SigninView( app.User );
-                    app.MainView.empty();
-                    app.MainView.render(signinView.render(), '.commonplay-row1-col1');
-                });
+                    function(SigninView, UserModel){
+                        app.Spinner.stop();
+                        app.Routine();
+                        var signinView = new SigninView( app.User );
+                        app.MainView.empty();
+                        app.MainView.render(signinView.render(), '.commonplay-row1-col1');
+                    });
             },
 
             widget: function(pageId) {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers',
-                    'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
-                function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
-                    var  page = new PageModel();
-                    var lives = new LivesCollection();
-                    page.urlRoot = page.url() + pageId;
-                    page.fetch({
-                        success: function(){
-                            app.Spinner.stop();
-                            app.Routine();
-                            var widgetView = new WidgetView({model: page});
-                            var speakersView = new SpeakersView({collection: speakers});
-                            var moderatorsView = new ModeratorsView({collection: moderators});
-                            var speakers = new UsersCollection(page.get('speakers'));
-                            var moderators = new UsersCollection(page.get('moderators'));
-                            app.MainView
-                            .render(widgetView.render(), '.commonplay-row1-col1')
-                            .render(speakersView.render(), '.commonplay-row2-col3')
-                            .render(moderatorsView.render(), '.commonplay-row2-col2');
-                        }
-                    });
-                    lives.filters['page'] = pageId;
-                    lives.fetch({
-                        success: function(){
-                            var livesView = new LivesView({collection: lives});
-                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                        }
-                    });
-                });
+                        'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
+                        function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
+                            var  page = new PageModel({id: pageId });
+                            page.fetch({
+                                success: function(){
+                                    app.Spinner.stop();
+                                    app.Routine();
+                                    var widgetView = new WidgetView({model: page});
+                                    var speakers = new UsersCollection(page.get('speakers'));
+                                    speakers.on('add', function(speaker){
+                                        page.get('speakers').push(speaker.get('email'));
+                                        page.save();
+                                    });
+                                    var speakersView = new SpeakersView({collection: speakers});
+                                    var moderators = new UsersCollection(page.get('moderators'));
+                                    moderators.on('add', function(moderator){moderator.save();});
+                                    var moderatorsView = new ModeratorsView({collection: moderators});
+                                    app.MainView
+                                    .render(widgetView.render(), '.commonplay-row1-col1')
+                                    .render(speakersView.render(), '.commonplay-row2-col3')
+                                    .render(moderatorsView.render(), '.commonplay-row2-col2');
+                                }
+                            });
+
+                            var lives = new LivesCollection();
+                            lives.on('add', function(live){
+                                live.save({ page: page.get('ressource_uri')});
+                            });
+                            lives.filters['page'] = pageId;
+                            lives.fetch({
+                                success: function(){
+                                    var livesView = new LivesView({collection: lives});
+                                    app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                }
+                            });
+                        });
             }
         });
 
-            app.Router = new app.Router();
-            Backbone.history.start(/*{pushState: true}*/);
-            return app;
-        }
-                       );
+        app.Router = new app.Router();
+        Backbone.history.start(/*{pushState: true}*/);
+        return app;
+    }
+);
