@@ -24,17 +24,15 @@ define(
             Router: null,
             Spinner: new Spinner(opts),
             MainView: new MainView(),
-            UserId: '0',
-            UserName: 'admin',
             Routine : function(){
-                if (require.user === undefined)
-                    app.Router.navigate("signin", {trigger: true});
+                if (require.appUser.isAuthenticated === 'False' )
+                    window.location.href = require.appConfig.loginUrl;
                 else{
                     require(
-                        [ 'modules/widget/views/widgetslist', 'page/collection'],
+                        ['modules/widget/views/widgetslist', 'page/collection'],
                         function (WidgetsListView, PageCollection) {
                             var pages = new PageCollection();
-                            pages.filters['created_by'] = app.UserId;
+                            pages.filters['created_by'] = require.appUser.id;
                             pages.fetch({
                                 success: function(){
                                     var widgetsList = new WidgetsListView({collection: pages});
@@ -53,7 +51,6 @@ define(
                 'widget/:pageId'    : 'widget',
                 'addwidget'           : 'addwidget',
                 'account'     : 'account',
-                'signin': 'signin',
                 'signout': 'signout'
             },
             dashboard: function() {
@@ -61,6 +58,7 @@ define(
                  * Test range of Collection
                  * If > 0 load widget route
                  */
+
             },
 
             account: function() {
