@@ -13,10 +13,10 @@
   </head>
   <body>
   {% block body %}{% endblock %}
+    {% if request.user.is_authenticated %}
     <script>
       (function () {
        'use strict';
-
        /**
          * retrieve config
          */
@@ -25,15 +25,14 @@
           'feedsApiUrl': '{{ feedsApiUrl }}',
           'poserApiUrl': '{{ poserApiUrl }}',
           'sockjsUrl': '{{ sockjsUrl }}',
-          'loginUrl': '{% url 'account_login' %}',
-          'logoutUrl': '{% url 'account_logout' %}',
-          'signupUrl': '{% url 'account_signup' %}',
-          'passwordResetUrl': '{% url 'account_password_reset' %}',
-          'passwordChangeUrl': '{% url 'account_password' %}',
-          'accountSettingsUrl': '{% url 'account_settings' %}',
-          'accountDeleteUrl': '{% url 'account_delete' %}',
+          'loginUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_login' %}',
+          'logoutUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_logout' %}',
+          'signupUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_signup' %}',
+          'passwordResetUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password_reset' %}',
+          'passwordChangeUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password' %}',
+          'accountSettingsUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_settings' %}',
+          'accountDeleteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_delete' %}',
         };
-
         /**
          * requirejs
          */
@@ -53,6 +52,7 @@
         document.head.appendChild(script);
       }).call(window);
     </script>
+    {% endif %}
     {% uservoice %}
   </body>
 </html>
