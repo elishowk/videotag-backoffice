@@ -5,7 +5,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                 <li><a href="#account">Account</a></li>
-                <li><a href="#logout">Déconnexion</a></li>
+                <li><a href="/account/logout">Déconnexion</a></li>
                 <li class= "gravatar"></li>
                 </ul>
             </div><!--/.nav-collapse -->

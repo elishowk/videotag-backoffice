@@ -91,8 +91,7 @@ define(
                                     app.Spinner.stop();
                                     var widgetView = new WidgetView({model: page});
                                     var speakers = new UsersCollection(page.get('speakers'));
-                                    speakers.on('add', function(speaker){
-                                    });
+                                    speakers.on('add', function(speaker){});
                                     var speakersView = new SpeakersView({collection: speakers});
                                     var moderators = new UsersCollection(page.get('moderators'));
                                     moderators.on('add', function(moderator){});
@@ -101,20 +100,21 @@ define(
                                     .render(widgetView.render(), '.commonplay-row1-col1')
                                     .render(speakersView.render(), '.commonplay-row2-col3')
                                     .render(moderatorsView.render(), '.commonplay-row2-col2');
+
+                                    var lives = new LivesCollection();
+                                    lives.on('add', function(live){
+                                        live.save({ page: page.get('ressource_uri')});
+                                    });
+                                    lives.filters['page'] = pageId;
+                                    lives.fetch({
+                                        success: function(){
+                                            var livesView = new LivesView({collection: lives});
+                                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                        }
+                                    });
                                 }
                             });
 
-                            var lives = new LivesCollection();
-                            lives.on('add', function(live){
-                                live.save({ page: page.get('ressource_uri')});
-                            });
-                            lives.filters['page'] = pageId;
-                            lives.fetch({
-                                success: function(){
-                                    var livesView = new LivesView({collection: lives});
-                                    app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                }
-                            });
                         });
             }
         });
