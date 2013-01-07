@@ -47,6 +47,7 @@
             username: '{{ request.user.username }}',
             email: '{{ request.user.email }}',
             is_anonymous: '{{ request.user.is_anonymous }}',
+            csrf: '{{ csrf_token }}',
           };
         });
         script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');

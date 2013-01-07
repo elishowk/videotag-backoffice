@@ -92,12 +92,10 @@ define(
                                     var widgetView = new WidgetView({model: page});
                                     var speakers = new UsersCollection(page.get('speakers'));
                                     speakers.on('add', function(speaker){
-                                        page.get('speakers').push(speaker.get('email'));
-                                        page.save();
                                     });
                                     var speakersView = new SpeakersView({collection: speakers});
                                     var moderators = new UsersCollection(page.get('moderators'));
-                                    moderators.on('add', function(moderator){moderator.save();});
+                                    moderators.on('add', function(moderator){});
                                     var moderatorsView = new ModeratorsView({collection: moderators});
                                     app.MainView
                                     .render(widgetView.render(), '.commonplay-row1-col1')
