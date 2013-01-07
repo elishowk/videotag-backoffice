@@ -19,16 +19,11 @@ define(
                 this.collection.remove(this.collection.get(this.$()));
             },
             render : function() {
-                this.$el.html(_.template(tplSpeakers, { speakers : this.collection.toJSON()}));
+                this.$el.html(_.template(tplSpeakers, { speakers : this.collection.toJSON(), inviteUrl: require.appConfig.inviteUrl, csrf: require.appUser.csrf}));
                 this.$el.find('.td-speaker').each( function(i){
                     $(this).append( $.gravatar( $(this).attr('title') , {size : 20 ,secure: true, rating: 'r'}) );
                 });
-                return  this;
-                $('button[speaker-id]').each(function(i){
-                    $(this).click(function(){
-                        this.collection.remove(this.collection.get($(this).attr('speaker-id')));
-                    });
-                });
+                return this;
             }
         });
     }

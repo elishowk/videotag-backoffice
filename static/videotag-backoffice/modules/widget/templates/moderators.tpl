@@ -35,7 +35,7 @@
                 <form  class="form" action="<%= inviteUrl %>"method="POST" accept-charset="utf-8" >
                     <fieldset>
                         <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='<%= csrf %>' ></div>
-                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='moderator' ></div>
+                        <div style='display:none'><input type='hidden' name='responsibility' value='moderator' ></div>
                         <div class="control-group" id="control-email">
                             <label class="control-label" for="email-moderator">E-mail du moderator: </label>
                             <div class="controls">

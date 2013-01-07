@@ -32,17 +32,23 @@
                 </p>
             </div>
             <div class="modal-body">
-                <form  class="form" action="/" >
+                <form  class="form" action="<%= inviteUrl %>"method="POST" accept-charset="utf-8" >
                     <fieldset>
+                        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='<%= csrf %>' ></div>
+                        <div style='display:none'><input type='hidden' name='responsibility' value='speaker' ></div>
                         <div class="control-group" id="control-email">
-                            <label class="control-label" for="email">E-mail du speaker: </label>                            
+                            <label class="control-label" for="email-speaker">E-mail du speaker: </label>
                             <div class="controls">
-                                <input type="text" id="email-speaker">
-                                <span class="help-inline"></span>                                    
+                                <input type="text" name="email_address"id="email_addres">
+                                <span class="help-inline"></span>
                             </div>
-                        </div>                                           
+                        </div>
+
+                        <div class="form-actions">
+                            <input type="submit" value="Invite" class="btn btn-primary">
+                        </div>
                     </fieldset>
-                </form>                
+                </form>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
