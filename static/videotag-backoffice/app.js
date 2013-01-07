@@ -1,6 +1,6 @@
 define(
-    [ 'backbone', 'spin', 'modules/base/views/main'],
-    function(Backbone, Spinner, MainView) {
+    [ 'backbone', 'spin', 'modules/base/views/main', 'modules/widget/views/widgetslist', 'page/collection'],
+    function(Backbone, Spinner, MainView, WidgetsListView, PageCollection) {
 
         var opts = {
             lines: 13, // The number of lines to draw
@@ -24,41 +24,40 @@ define(
             Router: null,
             Spinner: new Spinner(opts),
             MainView: new MainView(),
-            Routine : function(){
-                if (require.appUser.isAuthenticated === 'False' )
-                    window.location.href = require.appConfig.loginUrl;
-                else{
-                    require(
-                        ['modules/widget/views/widgetslist', 'page/collection'],
-                        function (WidgetsListView, PageCollection) {
-                            var pages = new PageCollection();
-                            pages.filters['created_by'] = require.appUser.id;
-                            pages.fetch({
-                                success: function(){
-                                    var widgetsList = new WidgetsListView({collection: pages});
-                                    app.MainView.render(widgetsList.render(), '.widgetslist');
-                                }
-                            });
-                        }
-                    );
-                }
-            }
+            Pages: new PageCollection()
+
         };
 
         app.Router = Backbone.Router.extend({
             routes: {
-                'dashboard'           : 'dashboard',
-                'widget/:pageId'    : 'widget',
-                'addwidget'           : 'addwidget',
+                ''              : 'dashboard',
+                'addwidget'     : 'addwidget',
+                'widget/:pageId': 'widget',
                 'account'     : 'account',
-                'signout': 'signout'
             },
-            dashboard: function() {
-                /**
-                 * Test range of Collection
-                 * If > 0 load widget route
-                 */
 
+            dashboard: function() {
+                if( window.location.href !== 'http://localhost:9000/')
+                    return;
+                else
+                    $('.commonplay-row1-col1').html('<div class="hero-unit"><h1>Välkommen, '+require.appUser.username+'!</h1></div>');
+            },
+
+            addwidget: function() {
+                app.MainView.empty();
+                app.Spinner.spin(document.getElementById('main'));
+                require(
+                    ['modules/widget/views/addwidget'],
+                    function (AddWidgetView) {
+                        app.Pages.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var addWidgetView = new AddWidgetView({collection: app.Pages, model: app.Pages.at(0)});
+                                app.MainView.render(addWidgetView.render(), '.commonplay-row1-col1');
+                            }.bind(this)
+                        });
+                    }
+                );
             },
 
             account: function() {
@@ -68,58 +67,16 @@ define(
                     ['modules/user/views/user',  'user/model'],
                     function (UserView, UserModel) {
                         var user = new UserModel();
-                        user.urlRoot = user.url() + app.UserId;
+                        user.urlRoot = user.url() + require.appUser.id;
                         user.fetch({
                             success: function(){
                                 app.Spinner.stop();
-                                app.Routine();
                                 var userView = new UserView({model: user})
                                 app.MainView.render(userView.render(), '.commonplay-row1-col1');
                             }
                         });
                     }
                 );
-            },
-
-            addwidget: function() {
-                app.MainView.empty();
-                app.Spinner.spin(document.getElementById('main'));
-                require(
-                    ['modules/widget/views/addwidget', 'page/collection'],
-                    function (AddWidgetView, PageCollection) {
-                        var pages = new PageCollection();
-                        pages.on('add', function(page){
-                            page.save({
-                                success: function(){
-                                    app.Router.navigate("widget/" + page.get('id'), {trigger: true});
-                                }
-                            });
-                        });
-                        pages.filters['username'] = app.UserName;
-                        pages.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                app.Routine();
-                                var addWidgetView = new AddWidgetView({collection: pages, model: pages.at(0)});
-                                app.MainView.render(addWidgetView.render(), '.commonplay-row1-col1');
-                            }.bind(this)
-                        });
-                    }
-                );
-            },
-
-            signin: function(){
-                app.MainView.empty();
-                app.Spinner.spin(document.getElementById('main'));
-                require(
-                    ['modules/user/views/signin', 'user/model'],
-                    function(SigninView, UserModel){
-                        app.Spinner.stop();
-                        app.Routine();
-                        var signinView = new SigninView( app.User );
-                        app.MainView.empty();
-                        app.MainView.render(signinView.render(), '.commonplay-row1-col1');
-                    });
             },
 
             widget: function(pageId) {
@@ -132,7 +89,6 @@ define(
                             page.fetch({
                                 success: function(){
                                     app.Spinner.stop();
-                                    app.Routine();
                                     var widgetView = new WidgetView({model: page});
                                     var speakers = new UsersCollection(page.get('speakers'));
                                     speakers.on('add', function(speaker){
@@ -166,6 +122,21 @@ define(
         });
 
         app.Router = new app.Router();
+        app.Pages.filters['created_by'] = require.appUser.id;
+        app.Pages.fetch({
+            success: function(){
+                var widgetsList = new WidgetsListView({collection: app.Pages});
+                app.MainView.render(widgetsList.render(), '.widgetslist');
+            }
+        });
+        app.Pages.on('add', function(page){
+            page.save({
+                success: function(){
+                    app.Router.navigate("widget/" + page.get('id'), {trigger: true});
+                }
+            });
+        });
+
         Backbone.history.start(/*{pushState: true}*/);
         return app;
     }

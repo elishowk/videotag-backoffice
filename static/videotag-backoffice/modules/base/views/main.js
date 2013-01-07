@@ -1,10 +1,11 @@
-define(['backbone', 'text!modules/base/templates/main.tpl'], function(Backbone, mainTpl) {
+define(['backbone', 'text!modules/base/templates/main.tpl', 'jquery-gravatar'], function(Backbone, mainTpl) {
     return Backbone.View.extend({
         'id': 'main',
         'tagName': 'div',
         'initialize': function() {
             this.$el.html(_.template(mainTpl));
             $(document.body).append(this.$el);
+            this.$el.find('.gravatar').append( $.gravatar( require.appUser.email , {size : 30 ,secure: true, rating: 'r'}));
         },
         render: function(content, target){
             if (content instanceof Backbone.View) {
@@ -16,7 +17,6 @@ define(['backbone', 'text!modules/base/templates/main.tpl'], function(Backbone, 
         },
         empty: function () {
             this.$el.find('.data-div ').empty();
-            this.$el.find('.widgetslist ').empty();
             return this;
         }
     });

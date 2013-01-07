@@ -32,6 +32,8 @@
           'passwordChangeUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password' %}',
           'accountSettingsUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_settings' %}',
           'accountDeleteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_delete' %}',
+          'hostUrl': '{{ request.build_absolute_uri|slice:':-1' }}',
+          'inviteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'invite' %}',
         };
         /**
          * requirejs
