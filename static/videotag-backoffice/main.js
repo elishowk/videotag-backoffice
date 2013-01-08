@@ -17,7 +17,7 @@ require.config({
         'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0/js/bootstrap-timepicker-2.0',
         'jquery-gravatar': 'lib/jquery-gravatar-1.0.1',
         'md5': 'lib/md5-2.1',
-        'raven': 'lib/raven-0.6.min',
+        'raven': 'lib/raven-js/src/raven',
         'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
         'page': 'videotag/page',
@@ -42,13 +42,19 @@ require.config({
         'backbone-validation': {
             'deps': ['backbone']
         },
+        'raven': {
+            'deps': ['jquery']
+        },
+
         'jquery-gravatar': {
             'deps': ['md5']
         }
     }
 });
 
-define(['app', 'poser/backbone-tastypie-0.1'], function (App) {
+define(['app', 'raven', 'poser/backbone-tastypie-0.1'], function (App) {
+    Raven.config('https://4c0bd81ed84b4eb2978cd395cccd15df:1a9f1a4a025f4d9792539bb2bc9653b6@app.getsentry.com/4494');
+    Raven.captureMessage('hello world!')
     App.initialize();
 });
 
