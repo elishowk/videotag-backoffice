@@ -27,20 +27,14 @@ define(
             Pages: new PageCollection(),
             WidgetsList: null,
             initialize: function(){
-
                 app.Pages.filters['created_by'] = require.appUser.id;
                 app.WidgetsList = new WidgetsListView({collection: app.Pages});
-                app.Pages.fetch({
-                    success: function(){app.WidgetsList.render();}
-                });
+                app.Pages.fetch({success: function(){app.WidgetsList.render();}});
                 app.Pages.on('add', function(page){
-                    page.save();
-                    app.Pages.fetch({
-                        success: function(){
-                            app.WidgetsList.render();
-                            // app.Router.navigate("widget/" + pages.getpage.get('id'), {trigger: true});
-                        }
-                    });
+                    page.save({}, {success: function(model, response){
+                        app.Router.navigate("widget/" + model.get('id'), {trigger: true});
+                        app.WidgetsList.render();
+                    }});
                 });
             }
         };
