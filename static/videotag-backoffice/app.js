@@ -28,6 +28,7 @@ define(
             WidgetsList: null,
             initialize: function(){
                 app.Pages.filters['created_by'] = require.appUser.id;
+                app.Pages.filters['limit'] = '5';
                 app.WidgetsList = new WidgetsListView({collection: app.Pages});
                 app.Pages.fetch({success: function(){app.WidgetsList.render();}});
                 app.Pages.on('add', function(page){
@@ -36,7 +37,7 @@ define(
                         app.WidgetsList.render();
                     }});
                 });
-            }
+              }
         };
 
         app.Router = Backbone.Router.extend({

@@ -10,8 +10,29 @@ define(
                 console.log(model, error);
                 return this;
             },
+            events: {
+                'click .previous': 'prvs',
+                'click .next': 'nxt'
+            },
+            prvs: function(){
+                this.collection.fetchPrevious({
+                    success: function(){
+                        this.render();
+                    }.bind(this)
+                });
+            },
+            nxt: function() {
+                this.collection.fetchNext({
+                    success: function(){
+                        this.render();
+                    }.bind(this)
+                });
+            },
             render: function() {
-                this.$el.html(_.template(widgetsListTpl ,{widgets : this.collection.toJSON()}));
+                this.$el.html(_.template(widgetsListTpl ,{
+                    widgets : this.collection.toJSON(),
+                    next: this.collection.meta.next,
+                    previous: this.collection.meta.previous}));
                 return this;
             }
         });

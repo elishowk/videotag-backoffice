@@ -1,4 +1,7 @@
-<legend><h2>Edition de Widget</h2> </legend>
+<legend>
+    <h2>Edition de Widget</h2> 
+    <h4> <%=title%> </h4>
+</legend>
 
 <h4>Le code Javascript à importer</h4>
         <div class = 'row'>
