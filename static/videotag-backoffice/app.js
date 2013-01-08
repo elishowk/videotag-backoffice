@@ -34,10 +34,12 @@ define(
                 app.Pages.on('add', function(page){
                     page.save({}, {success: function(model, response){
                         app.Router.navigate("widget/" + model.get('id'), {trigger: true});
-                        app.WidgetsList.render();
+                        app.WidgetsList.collection.filters['created_by'] = require.appUser.id;
+                        app.WidgetsList.collection.filters['limit'] = '5';
+                        app.Pages.fetch({success: function(){app.WidgetsList.render();}});
                     }});
                 });
-              }
+            }
         };
 
         app.Router = Backbone.Router.extend({
@@ -94,43 +96,45 @@ define(
             widget: function(pageId) {
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
-                require(['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers',
-                        'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
-                        function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
-                            var  page = new PageModel({id: pageId });
-                            page.fetch({
-                                success: function(){
-                                    app.Spinner.stop();
-                                    var widgetView = new WidgetView({model: page});
-                                    var speakers = new UsersCollection(page.get('speakers'));
-                                    speakers.on('add', function(speaker){});
-                                    var speakersView = new SpeakersView({collection: speakers});
-                                    var moderators = new UsersCollection(page.get('moderators'));
-                                    moderators.on('add', function(moderator){});
-                                    var moderatorsView = new ModeratorsView({collection: moderators});
-                                    app.MainView
-                                    .render(widgetView.render(), '.commonplay-row1-col1')
-                                    .render(speakersView.render(), '.commonplay-row2-col3')
-                                    .render(moderatorsView.render(), '.commonplay-row2-col2');
+                require(
+                    ['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers',
+                    'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
+                    function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
+                        var  page = new PageModel({id: pageId });
+                        page.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var widgetView = new WidgetView({model: page});
+                                var speakers = new UsersCollection(page.get('speakers'));
+                                speakers.on('add', function(speaker){});
+                                var speakersView = new SpeakersView({collection: speakers});
+                                var moderators = new UsersCollection(page.get('moderators'));
+                                moderators.on('add', function(moderator){});
+                                var moderatorsView = new ModeratorsView({collection: moderators});
+                                app.MainView
+                                .render(widgetView.render(), '.commonplay-row1-col1')
+                                .render(speakersView.render(), '.commonplay-row2-col3')
+                                .render(moderatorsView.render(), '.commonplay-row2-col2');
 
-                                    var lives = new LivesCollection();
-                                    lives.on('add', function(live){
-                                        live.set('page', page.get('resource_uri'));
-                                        live.save({},{success: function(){
-                                                var livesView = new LivesView({collection: lives});
-                                                app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                        }});
-                                    });
-                                    lives.filters['page'] = pageId;
-                                    lives.fetch({
-                                        success: function(){
-                                            var livesView = new LivesView({collection: lives});
-                                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                        }
-                                    });
-                                }
-                            });
+                                var lives = new LivesCollection();
+                                lives.on('add', function(live){
+                                    live.set('page', page.get('resource_uri'));
+                                    live.save({},{success: function(){
+                                        var livesView = new LivesView({collection: lives});
+                                        app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                    }});
+                                });
+                                lives.filters['page'] = pageId;
+                                lives.fetch({
+                                    success: function(){
+                                        var livesView = new LivesView({collection: lives});
+                                        app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                    }
+                                });
+                            }
                         });
+                    }
+                );
             }
         });
 

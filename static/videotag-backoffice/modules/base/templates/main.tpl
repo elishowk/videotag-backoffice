@@ -1,10 +1,10 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="">Commonplay</a>
+            <a class="brand" href="/">Commonplay</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                <li><a href="#account">Account</a></li>
+                <li><a href="/#account">Account</a></li>
                 <li><a href="/account/logout">Déconnexion</a></li>
                 <li class= "gravatar"></li>
                 </ul>

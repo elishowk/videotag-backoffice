@@ -15,6 +15,7 @@ define(
                 'click .next': 'nxt'
             },
             prvs: function(){
+                if (this.collection.meta.previous == null)return;
                 this.collection.fetchPrevious({
                     success: function(){
                         this.render();
@@ -22,6 +23,7 @@ define(
                 });
             },
             nxt: function() {
+                if (this.collection.meta.next == null)return;
                 this.collection.fetchNext({
                     success: function(){
                         this.render();
