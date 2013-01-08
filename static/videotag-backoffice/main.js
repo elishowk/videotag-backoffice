@@ -18,6 +18,7 @@ require.config({
         'jquery-gravatar': 'lib/jquery-gravatar-1.0.1',
         'md5': 'lib/md5-2.1',
         'raven': 'lib/raven-js/src/raven',
+        'uri': 'lib/raven-js/src/vendor/uri',
         'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
         'page': 'videotag/page',
@@ -43,7 +44,10 @@ require.config({
             'deps': ['backbone']
         },
         'raven': {
-            'deps': ['jquery']
+            'deps': [
+                'jquery',
+                'uri'
+            ]
         },
 
         'jquery-gravatar': {
