@@ -51,10 +51,12 @@ define(
             },
 
             dashboard: function() {
-                if( window.location.href !== 'http://localhost:9000/')
-                    return;
-                else
+                if( window.location.href !== 'http://localhost:9000/'){
+                    $('.externalTemplate').show();
+                }
+                else{
                     $('.commonplay-row1-col1').html('<div class="hero-unit"><h1>Välkommen, '+require.appUser.username+'!</h1></div>');
+                }
             },
 
             addwidget: function() {
@@ -98,42 +100,42 @@ define(
                 app.Spinner.spin(document.getElementById('main'));
                 require(
                     ['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers',
-                    'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
-                    function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
-                        var  page = new PageModel({id: pageId });
-                        page.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                var widgetView = new WidgetView({model: page});
-                                var speakers = new UsersCollection(page.get('speakers'));
-                                speakers.on('add', function(speaker){});
-                                var speakersView = new SpeakersView({collection: speakers});
-                                var moderators = new UsersCollection(page.get('moderators'));
-                                moderators.on('add', function(moderator){});
-                                var moderatorsView = new ModeratorsView({collection: moderators});
-                                app.MainView
-                                .render(widgetView.render(), '.commonplay-row1-col1')
-                                .render(speakersView.render(), '.commonplay-row2-col3')
-                                .render(moderatorsView.render(), '.commonplay-row2-col2');
+                        'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
+                        function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
+                            var  page = new PageModel({id: pageId });
+                            page.fetch({
+                                success: function(){
+                                    app.Spinner.stop();
+                                    var widgetView = new WidgetView({model: page});
+                                    var speakers = new UsersCollection(page.get('speakers'));
+                                    speakers.on('add', function(speaker){});
+                                    var speakersView = new SpeakersView({collection: speakers});
+                                    var moderators = new UsersCollection(page.get('moderators'));
+                                    moderators.on('add', function(moderator){});
+                                    var moderatorsView = new ModeratorsView({collection: moderators});
+                                    app.MainView
+                                    .render(widgetView.render(), '.commonplay-row1-col1')
+                                    .render(speakersView.render(), '.commonplay-row2-col3')
+                                    .render(moderatorsView.render(), '.commonplay-row2-col2');
 
-                                var lives = new LivesCollection();
-                                lives.on('add', function(live){
-                                    live.set('page', page.get('resource_uri'));
-                                    live.save({},{success: function(){
-                                        var livesView = new LivesView({collection: lives});
-                                        app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                    }});
-                                });
-                                lives.filters['page'] = pageId;
-                                lives.fetch({
-                                    success: function(){
-                                        var livesView = new LivesView({collection: lives});
-                                        app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                    }
-                                });
-                            }
-                        });
-                    }
+                                    var lives = new LivesCollection();
+                                    lives.on('add', function(live){
+                                        live.set('page', page.get('resource_uri'));
+                                        live.save({},{success: function(){
+                                            var livesView = new LivesView({collection: lives});
+                                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                        }});
+                                    });
+                                    lives.filters['page'] = pageId;
+                                    lives.fetch({
+                                        success: function(){
+                                            var livesView = new LivesView({collection: lives});
+                                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                        }
+                                    });
+                                }
+                            });
+                        }
                 );
             }
         });

@@ -16,6 +16,7 @@ define(['backbone', 'text!modules/base/templates/main.tpl', 'jquery-gravatar'], 
             return this;
         },
         empty: function () {
+            $('.externalTemplate').hide();
             this.$el.find('.data-div ').empty();
             return this;
         }
