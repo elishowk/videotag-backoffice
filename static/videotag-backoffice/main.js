@@ -49,7 +49,6 @@ require.config({
 });
 
 define(['app', 'poser/backbone-tastypie-0.1'], function (App) {
-
-    //App.initialize();
+    App.initialize();
 });
 

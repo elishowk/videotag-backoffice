@@ -24,8 +24,25 @@ define(
             Router: null,
             Spinner: new Spinner(opts),
             MainView: new MainView(),
-            Pages: new PageCollection()
+            Pages: new PageCollection(),
+            WidgetsList: null,
+            initialize: function(){
 
+                app.Pages.filters['created_by'] = require.appUser.id;
+                app.WidgetsList = new WidgetsListView({collection: app.Pages});
+                app.Pages.fetch({
+                    success: function(){app.WidgetsList.render();}
+                });
+                app.Pages.on('add', function(page){
+                    page.save();
+                    app.Pages.fetch({
+                        success: function(){
+                            app.WidgetsList.render();
+                            // app.Router.navigate("widget/" + pages.getpage.get('id'), {trigger: true});
+                        }
+                    });
+                });
+            }
         };
 
         app.Router = Backbone.Router.extend({
@@ -103,7 +120,11 @@ define(
 
                                     var lives = new LivesCollection();
                                     lives.on('add', function(live){
-                                        live.save({ page: page.get('ressource_uri')});
+                                        live.set('page', page.get('resource_uri'));
+                                        live.save({},{success: function(){
+                                                var livesView = new LivesView({collection: lives});
+                                                app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                        }});
                                     });
                                     lives.filters['page'] = pageId;
                                     lives.fetch({
@@ -114,27 +135,11 @@ define(
                                     });
                                 }
                             });
-
                         });
             }
         });
 
         app.Router = new app.Router();
-        app.Pages.filters['created_by'] = require.appUser.id;
-        app.Pages.fetch({
-            success: function(){
-                var widgetsList = new WidgetsListView({collection: app.Pages});
-                app.MainView.render(widgetsList.render(), '.widgetslist');
-            }
-        });
-        app.Pages.on('add', function(page){
-            page.save({
-                success: function(){
-                    app.Router.navigate("widget/" + page.get('id'), {trigger: true});
-                }
-            });
-        });
-
         Backbone.history.start(/*{pushState: true}*/);
         return app;
     }

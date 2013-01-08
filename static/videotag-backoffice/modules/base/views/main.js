@@ -11,7 +11,7 @@ define(['backbone', 'text!modules/base/templates/main.tpl', 'jquery-gravatar'], 
             if (content instanceof Backbone.View) {
                 content = content.$el;
             }
-
+            this.$el.find(target).empty();
             this.$el.find(target).append(content);
             return this;
         },
