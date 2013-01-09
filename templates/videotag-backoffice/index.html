@@ -4,61 +4,61 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-    <meta charset="utf-8" />
-    <title>{% block head_title %}CommonPlay{% endblock %}</title>
-    <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-2.2.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-datepicker-2.0/css/datepicker.css"/>
-    <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-timepicker-2.0/compiled/timepicker.css"/>
-    <link rel="stylesheet" href="{% get_static_prefix %}videotag-backoffice/css/backoffice.css"/>
-  </head>
-  <body>
-  {% block body %}
-  
-  <div class="span5 offset3 externalTemplate">{% block template %}{% endblock %}</div>
-  {% endblock %}
-    {% if request.user.is_authenticated %}
-    <script>
-      (function () {
-       'use strict';
-       /**
-         * retrieve config
-         */
-        var config = {
-          'baseUrl': '{% get_static_prefix %}',
-          'feedsApiUrl': '{{ feedsApiUrl }}',
-          'poserApiUrl': '{{ poserApiUrl }}',
-          'sockjsUrl': '{{ sockjsUrl }}',
-          'loginUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_login' %}',
-          'logoutUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_logout' %}',
-          'signupUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_signup' %}',
-          'passwordResetUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password_reset' %}',
-          'passwordChangeUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password' %}',
-          'accountSettingsUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_settings' %}',
-          'accountDeleteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_delete' %}',
-          'hostUrl': '{{ request.build_absolute_uri|slice:':-1' }}',
-          'inviteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'invite' %}',
-        };
-        /**
-         * requirejs
-         */
-        var script = document.createElement('script');
-        script.addEventListener('load', function () {
-          require.appConfig = config;
-          require.appUser = {
-            isAuthenticated: '{{ request.user.is_authenticated }}',
-            id: '{{ request.user.id }}',
-            username: '{{ request.user.username }}',
-            email: '{{ request.user.email }}',
-            is_anonymous: '{{ request.user.is_anonymous }}',
-            csrf: '{{ csrf_token }}',
-          };
-        });
-        script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');
-        script.setAttribute('data-main', config.baseUrl + 'videotag-backoffice/main.js');
-        document.head.appendChild(script);
-      }).call(window);
-    </script>
-    {% endif %}
-    {% uservoice %}
-  </body>
+        <meta charset="utf-8" />
+        <title>{% block head_title %}CommonPlay{% endblock %}</title>
+        <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-2.2.2/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-datepicker-2.0/css/datepicker.css"/>
+        <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-timepicker-2.0/compiled/timepicker.css"/>
+        <link rel="stylesheet" href="{% get_static_prefix %}videotag-backoffice/css/backoffice.css"/>
+    </head>
+    <body>
+        {% block body %}
+
+        <div class="offset3 externalTemplate">{% block template %}{% endblock %}</div>
+        {% endblock %}
+        {% if request.user.is_authenticated %}
+        <script>
+            (function () {
+                'use strict';
+                /**
+                 * retrieve config
+                 */
+                var config = {
+                    'baseUrl': '{% get_static_prefix %}',
+                    'feedsApiUrl': '{{ feedsApiUrl }}',
+                    'poserApiUrl': '{{ poserApiUrl }}',
+                    'sockjsUrl': '{{ sockjsUrl }}',
+                    'loginUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_login' %}',
+                    'logoutUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_logout' %}',
+                    'signupUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_signup' %}',
+                    'passwordResetUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password_reset' %}',
+                    'passwordChangeUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_password' %}',
+                    'accountSettingsUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_settings' %}',
+                    'accountDeleteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'account_delete' %}',
+                    'hostUrl': '{{ request.build_absolute_uri|slice:':-1' }}',
+                    'inviteUrl': '{{ request.build_absolute_uri|slice:':-1' }}{% url 'invite' %}',
+                };
+                /**
+                 * requirejs
+                 */
+                var script = document.createElement('script');
+                script.addEventListener('load', function () {
+                    require.appConfig = config;
+                    require.appUser = {
+                        isAuthenticated: '{{ request.user.is_authenticated }}',
+                        id: '{{ request.user.id }}',
+                        username: '{{ request.user.username }}',
+                        email: '{{ request.user.email }}',
+                        is_anonymous: '{{ request.user.is_anonymous }}',
+                        csrf: '{{ csrf_token }}',
+                    };
+                });
+                script.setAttribute('src', config.baseUrl + 'lib/require-2.1.2.min.js');
+                script.setAttribute('data-main', config.baseUrl + 'videotag-backoffice/main.js');
+                document.head.appendChild(script);
+            }).call(window);
+        </script>
+        {% endif %}
+        {% uservoice %}
+    </body>
 </html>

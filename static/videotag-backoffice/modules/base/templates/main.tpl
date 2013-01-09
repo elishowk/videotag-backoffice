@@ -1,12 +1,20 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
-        <div class="container">
+        <div class='container'>
             <a class="brand" href="/">Commonplay</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                <li><a href="/#account">Account</a></li>
-                <li><a href="/account/logout">Déconnexion</a></li>
-                <li class= "gravatar"></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle gravatar" data-toggle="dropdown"> Account <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/#account">Account</a></li>
+                            <li><a href="/account/password">Mot de passe</a></li>
+                            <li><a href="/account/settings">Change Email</a></li>
+                            <li><a href="/account/logout">Déconnexion</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/account/delete">Supprimer</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
