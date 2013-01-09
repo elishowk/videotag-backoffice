@@ -23,7 +23,8 @@ require.config({
         'modules':  'videotag-backoffice/modules',
         'page': 'videotag/page',
         'live': 'videotag/pseudolive',
-        'user': 'videotag/user'
+        'user': 'videotag/user',
+        'melomaniac': 'videotag/melomaniac'
     },
     'shim': {
         'app': {
@@ -57,8 +58,8 @@ require.config({
 });
 
 define(['app', 'raven', 'poser/backbone-tastypie-0.1'], function (App) {
-    Raven.config('https://4c0bd81ed84b4eb2978cd395cccd15df:1a9f1a4a025f4d9792539bb2bc9653b6@app.getsentry.com/4494');
-    Raven.captureMessage('hello world!')
+    //Raven.config('https://4c0bd81ed84b4eb2978cd395cccd15df:1a9f1a4a025f4d9792539bb2bc9653b6@app.getsentry.com/4494');
+    //Raven.captureMessage('hello world!')
     App.initialize();
 });
 

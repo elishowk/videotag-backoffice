@@ -81,8 +81,8 @@ define(
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/user/views/user',  'user/model', 'modules/melomaniac'],
-                    function (UserView, UserModel) {
+                    ['modules/user/views/user', 'user/model', 'modules/user/views/melomaniac', 'melomaniac/collection'],
+                    function (UserView, UserModel, MelomaniacView, MelomaniacsCollection) {
                         var user = new UserModel();
                         user.urlRoot = user.url() + require.appUser.id;
                         user.fetch({
@@ -90,6 +90,15 @@ define(
                                 app.Spinner.stop();
                                 var userView = new UserView({model: user})
                                 app.MainView.render(userView.render(), '.commonplay-row1-col1');
+                            }
+                        });
+                        var melomaniacs = new MelomaniacsCollection();
+                        melomaniacs.filters['user'] = require.appUser.id;
+                        melomaniacs.fetch({
+                            success: function(){
+                                app.Spinner.stop();
+                                var melomaniacView = new MelomaniacView({model: melomaniacs.at(0)})
+                                app.MainView.render(melomaniacView.render(), '.commonplay-row1-col2');
                             }
                         });
                     }
