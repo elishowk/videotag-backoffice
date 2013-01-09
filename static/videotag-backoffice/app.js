@@ -55,6 +55,7 @@ define(
                     $('.externalTemplate').show();
                 }
                 else{
+                    app.MainView.empty();
                     $('.commonplay-row1-col1').html('<div class="hero-unit"><h1>Välkommen, '+require.appUser.username+'!</h1></div>');
                 }
             },
