@@ -81,7 +81,7 @@ define(
                 app.MainView.empty();
                 app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/user/views/user',  'user/model'],
+                    ['modules/user/views/user',  'user/model', 'modules/melomaniac'],
                     function (UserView, UserModel) {
                         var user = new UserModel();
                         user.urlRoot = user.url() + require.appUser.id;
