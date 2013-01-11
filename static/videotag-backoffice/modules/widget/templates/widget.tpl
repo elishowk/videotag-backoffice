@@ -1,24 +1,21 @@
 <legend>
-    <h2>Edition de Widget</h2> 
-    <h4> <%=title%> </h4>
+    <h2>Edition de Widget</h2>
+    <h4> <%=widget.title%> </h4>
 </legend>
 
 <h4>Le code Javascript à importer</h4>
-        <div class = 'row'>
-            <pre class = 'span5 snippet'></pre>
-        <div class = 'span3'>
+<div = class"row-fluid">
+             <div class = 'span10'><pre class = 'snippet'></pre></div>
+             <div class = 'span2'>
                 <a href="#preview" role="button" class="btn btn-primary btn-large" id="btn-preview" data-toggle="modal">
-                    Preview 
-                    </a>
-              <% if( published  == 1 ) {%>
-                <h4>Intéractions</h4> <span class="badge badge-success">Activé</span> 
-                <button type="button" class="btn btn-danger"  id='btn-unpublish' widget-id=<%= id %> >Désactivé</button>
+                    Preview
+                </a>
+                <h4>Intéractions</h4> 
+                <% if( widget.published  == 1 ) {%>
+                    <img class="switch" src ="<%=baseUrl%>videotag-backoffice/img/switch_enabled.png" width="110" alt="switch enabled" />
                 <%}else {%>
-                <h4>Intéractions</h4> <span class="badge badge-important">Désactivé</span> 
-                <button type="button" class="btn btn-success"  widget-id=<%= id %>  id='btn-publish'>Activé</button>
+                    <img class="switch" src ="<%=baseUrl%>videotag-backoffice/img/switch_disabled.png" width="110" alt="switch disabled" />
                 <%}%>
             </div>
-        </div>
-
-        <legend>Configurez votre widget</legend>    
- 
+</div>
+        <legend>Configurez votre widget</legend>

@@ -4,6 +4,7 @@ define(
         'use strict';
         return Backbone.View.extend({
             tagName: 'div',
+            className: 'span4',
             events: {
                 'click #btn-addlive': 'addlive',
                 'click #btn-dellive': 'dellive'

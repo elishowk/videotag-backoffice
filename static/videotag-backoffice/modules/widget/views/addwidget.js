@@ -4,6 +4,7 @@ define(
         'use strict';
         return Backbone.View.extend({
             tagName: 'div',
+            className: 'span9',
             events : {
                 'keyup': 'validate',
                 'keyup #url': 'checkvideo',

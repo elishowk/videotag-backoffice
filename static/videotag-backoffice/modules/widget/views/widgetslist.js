@@ -5,7 +5,7 @@ define(
         return Backbone.View.extend({
             el: '.widgetslist',
             tagName: 'div',
-            className: 'well sidebar-nav',
+            className: 'span3',
             error: function(model, error) {
                 console.log(model, error);
                 return this;

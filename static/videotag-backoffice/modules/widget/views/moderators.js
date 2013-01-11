@@ -4,6 +4,8 @@ define(
         'use strict';
         /* TODO: gravatar */
         return Backbone.View.extend({
+            tagName: 'div',
+            className: 'span4',
             events : {
                 'click #btn-addmoderator': 'addmoderator',
                 'click #btn-delmoderator': 'delmoderator'

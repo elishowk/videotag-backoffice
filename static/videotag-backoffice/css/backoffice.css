@@ -1,19 +1,27 @@
-body 
-{ 
+body
+{
+    background-image:url(../img/header_bg.png);
     min-height: 100%;
-    padding-top: 60px;x 
+    padding-top: 60px;
+    margin-right: 10%;
+    margin-left: 10%;
 }
+
 #main-div
 {
     overflow:auto;
-    padding-bottom:150px; /* this needs to be bigger than footer height*/
 }
-.footer
+#header{
+    position:relative;
+    margin-bottom: 15px;
+}
+.navbar{
+    margin-bottom: 10px;
+    position:absolute; bottom:0;
+    position:absolute; right:0;
+}
+#footer
 {
-    position: relative;
-    height: 110px;
-    clear:both;
-    color:#fff;
-    margin-bottom: 1px;
-    background-color: #222; 
+    margin-right: 10%;
+    margin-left: 10%;
 }
