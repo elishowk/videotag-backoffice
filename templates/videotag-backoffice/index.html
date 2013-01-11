@@ -12,10 +12,65 @@
         <link rel="stylesheet" href="{% get_static_prefix %}videotag-backoffice/css/backoffice.css"/>
     </head>
     <body>
-        {% block body %}
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class='container'>
+                    <a class="brand" href="/">Commonplay</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="/">Dashboard</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle gravatar" data-toggle="dropdown"> Account <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/#account">Account</a></li>
+                                    <li><a href="{% url 'account_password' %}">Mot de passe</a></li>
+                                    <li><a href="{% url 'account_settings' %}">Change Email</a></li>
+                                    <li><a href="{% url 'account_logout' %}">Déconnexion</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{% url 'account_delete' %}">Supprimer</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
 
-        <div class="offset3 externalTemplate">{% block template %}{% endblock %}</div>
+        {% block body %}
+            <div class="offset3 externalTemplate">{% block template %}{% endblock %}</div>
         {% endblock %}
+
+<div class="container" id="mainDiv"></div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="span2 offset2">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="">About Us</a></li>
+                            <li><a href="">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="span2 offset1">
+                        <h4>Resource</h4>
+                        <ul>
+                            <li><a href="">Get help</a></li>
+                            <li><a href="">FAQ</a></li>
+                            <li><a href="">Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="span2 offset1">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="" title="Facebook">Facebook</a></li>
+                            <li><a href="" title="Twitter">Twitter</a></li>
+                            <li><a href="" title="Blogs">Blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
         {% if request.user.is_authenticated %}
         <script>
             (function () {
