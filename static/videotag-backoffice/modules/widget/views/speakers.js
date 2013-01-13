@@ -5,6 +5,7 @@ define(
         /*TODO: gravata*/
         return Backbone.View.extend({
             tagName: 'div',
+            className: 'span4',
             events : {
                 'click #btn-addspeaker': 'addspeaker'
                 //'click #btn-delspeaker': 'delspeaker',

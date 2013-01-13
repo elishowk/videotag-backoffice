@@ -4,7 +4,7 @@ define(['backbone', 'text!modules/base/templates/main.tpl', 'jquery-gravatar'], 
         'tagName': 'div',
         'initialize': function() {
             this.$el.html(_.template(mainTpl));
-            $(document.body).append(this.$el);
+            $(document.getElementById('mainDiv')).append(this.$el);
             this.$el.find('.gravatar').html( $.gravatar( require.appUser.email , {size : 30 ,secure: true, rating: 'r'}));
             this.$el.find('.gravatar').append(' Hi, '+ require.appUser.username );
         },

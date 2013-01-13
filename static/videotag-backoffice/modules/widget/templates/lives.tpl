@@ -1,5 +1,4 @@
 <a href="#liveModal" role="button" class="btn btn-primary" id="btn-liveModal" data-toggle="modal">Ajout de live !</a> 
-
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -17,8 +16,7 @@
             </tr>
             <% }); %>
         </tbody>
-    </table>             
-
+    </table>
         <!-- Modal -->
         <div id="liveModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-live" aria-hidden="true">
             <div class="modal-header">
