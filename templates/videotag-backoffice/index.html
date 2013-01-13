@@ -13,9 +13,9 @@
     </head>
     <body>
         {% block body %}
-
-        <div class="offset3 externalTemplate">{% block template %}{% endblock %}</div>
+        <div class="container-fluid externalTemplate">{% block template %}{% endblock %}</div>
         {% endblock %}
+
         {% if request.user.is_authenticated %}
         <script>
             (function () {
