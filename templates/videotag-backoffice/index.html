@@ -12,73 +12,70 @@
         <link rel="stylesheet" href="{% get_static_prefix %}videotag-backoffice/css/backoffice.css"/>
     </head>
     <body>
-
-
-<div class="container-fluid" id="mainDiv">
-    <div class="row-fluid" id="header">
-    <a href="#" >
-         <img class="logo" src="{% get_static_prefix %}videotag-backoffice/img/logo.svg" alt="Logo CommonPlay" />
-    </a>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class='container-fluid'>
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <div class="nav-collapse">
-                        <ul class="nav">
-                            <li><a href="/">Dashboard</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle gravatar" data-toggle="dropdown"> Account <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/#account">Account</a></li>
-                                    <li><a href="{% url 'account_password' %}">Mot de passe</a></li>
-                                    <li><a href="{% url 'account_settings' %}">Change Email</a></li>
-                                    <li><a href="{% url 'account_logout' %}">Déconnexion</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{% url 'account_delete' %}">Supprimer</a></li>
+        <div class="container-fluid" id="mainDiv">
+            <div class="row-fluid" id="header">
+                <a href="#" >
+                     <img class="logo" src="{% get_static_prefix %}videotag-backoffice/img/logo.svg" alt="Logo CommonPlay" />
+                </a>
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class='container-fluid'>
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+                            <div class="nav-collapse">
+                                <ul class="nav">
+                                    <li><a href="/">Dashboard</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle gravatar" data-toggle="dropdown"> Account <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/#account">Account</a></li>
+                                            <li><a href="{% url 'account_password' %}">Mot de passe</a></li>
+                                            <li><a href="{% url 'account_settings' %}">Change Email</a></li>
+                                            <li><a href="{% url 'account_logout' %}">Déconnexion</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{% url 'account_delete' %}">Supprimer</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+                            </div><!--/.nav-collapse -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% block body %}
+                <div class="row-fluid"><div class='span7 externalTemplate well'>{% block template %}{% endblock %}</div></div>
+            {% endblock %}
+        </div>
+        <div class="container-fuild well" id="footer">
+            <div class="row-fuild">
+                <div class="span2">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="span2">
+                    <h4>Resource</h4>
+                    <ul>
+                        <li><a href="">Get help</a></li>
+                        <li><a href="">FAQ</a></li>
+                        <li><a href="">Support</a></li>
+                    </ul>
+                </div>
+                <div class="span2">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="" title="Facebook">Facebook</a></li>
+                        <li><a href="" title="Twitter">Twitter</a></li>
+                        <li><a href="" title="Blogs">Blogs</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-</div>
-        {% block body %}
-            <div class="row-fluid"><div class='span7 externalTemplate well'>{% block template %}{% endblock %}</div></div>
-        {% endblock %}
-</div>
-            <div class="container-fuild well" id="footer">
-                <div class="row-fuild">
-                    <div class="span2">
-                        <h4>Company</h4>
-                        <ul>
-                            <li><a href="">About Us</a></li>
-                            <li><a href="">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="span2">
-                        <h4>Resource</h4>
-                        <ul>
-                            <li><a href="">Get help</a></li>
-                            <li><a href="">FAQ</a></li>
-                            <li><a href="">Support</a></li>
-                        </ul>
-                    </div>
-                    <div class="span2">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="" title="Facebook">Facebook</a></li>
-                            <li><a href="" title="Twitter">Twitter</a></li>
-                            <li><a href="" title="Blogs">Blogs</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         {% if request.user.is_authenticated %}
         <script>
             (function () {
