@@ -36,7 +36,10 @@ define(
                         app.Router.navigate("widget/" + model.get('id'), {trigger: true});
                         app.WidgetsList.collection.filters['created_by'] = require.appUser.id;
                         app.WidgetsList.collection.filters['limit'] = '5';
-                        app.Pages.fetch({success: function(){app.WidgetsList.render();}});
+                        app.Pages.fetch({success: function(){
+                            app.MainView.empty();
+                            app.WidgetsList.render();
+                        }});
                     }});
                 });
             }
@@ -51,7 +54,7 @@ define(
             },
 
             dashboard: function() {
-                if( window.location.href !== 'http://localhost:9000/'){
+                if( window.location.href !== require.appConfig.hostUr){
                     $('.externalTemplate').show();
                 }
                 else{
@@ -70,6 +73,7 @@ define(
                             success: function(){
                                 app.Spinner.stop();
                                 var addWidgetView = new AddWidgetView({collection: app.Pages, model: app.Pages.at(0)});
+                                app.MainView.empty();
                                 app.MainView.render(addWidgetView.render(), '.commonplay-row1-col1');
                             }.bind(this)
                         });
@@ -89,6 +93,7 @@ define(
                             success: function(){
                                 app.Spinner.stop();
                                 var userView = new UserView({model: user})
+                                app.MainView.empty();
                                 app.MainView.render(userView.render(), '.commonplay-row1-col1');
                             }
                         });
@@ -98,6 +103,7 @@ define(
                             success: function(){
                                 app.Spinner.stop();
                                 var melomaniacView = new MelomaniacView({model: melomaniacs.at(0)})
+                                app.MainView.empty();
                                 app.MainView.render(melomaniacView.render(), '.commonplay-row1-col2');
                             }
                         });
@@ -123,6 +129,7 @@ define(
                                     var moderators = new UsersCollection(page.get('moderators'));
                                     moderators.on('add', function(moderator){});
                                     var moderatorsView = new ModeratorsView({collection: moderators});
+                                    app.MainView.empty();
                                     app.MainView
                                     .render(widgetView.render(), '.commonplay-row1-col1')
                                     .render(speakersView.render(), '.commonplay-row2-col3')
