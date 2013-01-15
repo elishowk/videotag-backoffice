@@ -1,4 +1,4 @@
-define(['backbone', 'text!modules/base/templates/main.tpl', 'jquery-gravatar'], function(Backbone, mainTpl) {
+define(['backbone', 'modules/base/templates/main.tpl', 'jquery-gravatar'], function(Backbone, mainTpl) {
     return Backbone.View.extend({
         'id': 'main',
         'tagName': 'div',

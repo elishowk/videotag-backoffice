@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/widget/templates/speakers.tpl', 'jquery-gravatar'],
+    ['backbone', 'modules/widget/templates/speakers.tpl', 'jquery-gravatar'],
     function(Backbone, tplSpeakers) {
         'use strict';
         /*TODO: gravata*/

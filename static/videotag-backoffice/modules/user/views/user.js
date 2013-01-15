@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/user/templates/user.tpl', 'backbone-validation'],
+    ['backbone', 'modules/user/templates/user.tpl', 'backbone-validation'],
     function(Backbone, tplUser) {
         'use strict';
         return Backbone.View.extend({

@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/widget/templates/moderators.tpl', 'jquery-gravatar'],
+    ['backbone', 'modules/widget/templates/moderators.tpl', 'jquery-gravatar'],
     function(Backbone, tplModerators) {
         'use strict';
         /* TODO: gravatar */

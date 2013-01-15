@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/widget/templates/addwidget.tpl', 'backbone-validation'],
+    ['backbone', 'modules/widget/templates/addwidget.tpl', 'backbone-validation'],
     function(Backbone, tplAddWidget) {
         'use strict';
         return Backbone.View.extend({

@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'text!modules/user/templates/melomaniac.tpl', 'backbone-validation'],
+    ['backbone', 'modules/user/templates/melomaniac.tpl', 'backbone-validation'],
     function(Backbone, tplMelomaniac) {
         'use strict';
         return Backbone.View.extend({
