@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'modules/widget/templates/widget.tpl', 'text!modules/widget/templates/snippet.tpl'  ],
+    ['backbone', 'modules/widget/templates/widget.tpl', 'modules/widget/templates/snippet.tpl'  ],
     function(Backbone, tplWidget, tplSnippet) {
         'use strict';
         return Backbone.View.extend({

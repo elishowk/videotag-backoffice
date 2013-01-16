@@ -40,7 +40,10 @@ require.config({
             'exports': 'Backbone'
         },
         'backbone-validation': {
-            'deps': ['backbone']
+            'deps': [
+                'backbone',
+                'modules/validate'
+            ]
         },
         'raven': {
             'deps': [
@@ -56,7 +59,6 @@ require.config({
 
 define(['app', 'raven', 'poser/backbone-tastypie-0.1'], function (App) {
     Raven.config('https://1849bbdf8c80460cb4564f91f378f0d3@app.getsentry.com/92');
-    Raven.captureMessage('hello world!');
     //window.onerror = Raven.process;
     App.initialize();
 });

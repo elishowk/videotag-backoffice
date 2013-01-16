@@ -54,7 +54,7 @@ define(
             },
 
             dashboard: function() {
-                if( window.location.href !== require.appConfig.hostUr){
+                if( window.location.href !== 'http://commonplay.eu/'){
                     $('.externalTemplate').show();
                 }
                 else{
@@ -119,39 +119,31 @@ define(
                         'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
                             var  page = new PageModel({id: pageId });
-                            page.fetch({
-                                success: function(){
-                                    app.Spinner.stop();
-                                    var widgetView = new WidgetView({model: page});
-                                    var speakers = new UsersCollection(page.get('speakers'));
-                                    speakers.on('add', function(speaker){});
-                                    var speakersView = new SpeakersView({collection: speakers});
-                                    var moderators = new UsersCollection(page.get('moderators'));
-                                    moderators.on('add', function(moderator){});
-                                    var moderatorsView = new ModeratorsView({collection: moderators});
-                                    app.MainView.empty();
-                                    app.MainView
-                                    .render(widgetView.render(), '.commonplay-row1-col1')
-                                    .render(speakersView.render(), '.commonplay-row2-col3')
-                                    .render(moderatorsView.render(), '.commonplay-row2-col2');
+                            page.fetch({success: function(){
+                                var moderatorsView = new ModeratorsView({collection: new UsersCollection(page.get('moderators'))});
+                                var speakersView = new SpeakersView({collection: new UsersCollection(page.get('speakers'))});
+                                var widgetView = new WidgetView({model: page});
+                                app.Spinner.stop();
+                                app.MainView
+                                .empty()
+                                .render(widgetView.render(), '.commonplay-row1-col1')
+                                .render(speakersView.render(), '.commonplay-row2-col3')
+                                .render(moderatorsView.render(), '.commonplay-row2-col2');
 
-                                    var lives = new LivesCollection();
-                                    lives.on('add', function(live){
-                                        live.set('page', page.get('resource_uri'));
-                                        live.save({},{success: function(){
-                                            var livesView = new LivesView({collection: lives});
-                                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                        }});
-                                    });
-                                    lives.filters['page'] = pageId;
-                                    lives.fetch({
-                                        success: function(){
-                                            var livesView = new LivesView({collection: lives});
-                                            app.MainView.render(livesView.render(), '.commonplay-row2-col1');
-                                        }
-                                    });
-                                }
-                            });
+                                var lives = new LivesCollection();
+                                lives.on('add', function(live){
+                                    live.set('page', page.get('resource_uri'));
+                                    live.save({},{success: function(){
+                                        var livesView = new LivesView({collection: lives});
+                                        app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                    }});
+                                });
+                                lives.filters['page'] = pageId;
+                                lives.fetch({success: function(){
+                                    var livesView = new LivesView({collection: lives});
+                                    app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                }});
+                            }});
                         }
                 );
             }
