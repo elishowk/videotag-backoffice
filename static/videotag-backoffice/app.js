@@ -85,7 +85,7 @@ define(
                     function (UserView, UserModel, MelomaniacView, MelomaniacsCollection) {
                         var userView = new UserView({model: new UserModel()})
                         userView.model.urlRoot = userView.model.url() + require.appUser.id;
-                        userView.fetch({
+                        userView.model.fetch({
                             success: function(){
                                 app.Spinner.stop();
                                 app.MainView.empty();
@@ -98,7 +98,6 @@ define(
                             success: function(){
                                 app.Spinner.stop();
                                 var melomaniacView = new MelomaniacView({model: melomaniacs.at(0)})
-                                app.MainView.empty();
                                 app.MainView.render(melomaniacView.render(), '.commonplay-row1-col2');
                             }
                         });
