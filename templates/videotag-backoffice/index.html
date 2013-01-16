@@ -12,7 +12,8 @@
         <link rel="stylesheet" href="{% get_static_prefix %}videotag-backoffice/css/backoffice.css"/>
     </head>
     <body>
-        <div class="container-fluid" id="mainDiv">
+    <div class = "container-fluid">
+        <div class="row-fluid" id="mainDiv">
             <div class="row-fluid" id="header">
                 <a href="#" >
                      <img class="logo" href="/" src="{% get_static_prefix %}videotag-backoffice/img/logo.svg" alt="Logo CommonPlay" />
@@ -31,12 +32,12 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle gravatar" data-toggle="dropdown"> Account <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/#account">Account</a></li>
-                                            <li><a href="{% url 'account_password' %}">Mot de passe</a></li>
-                                            <li><a href="{% url 'account_settings' %}">Change Email</a></li>
-                                            <li><a href="{% url 'account_logout' %}">Déconnexion</a></li>
+                                            <li><a href="/#account">Editer profile</a></li>
+                                            <li><a href="{% url 'account_password' %}">Changer mot de passe</a></li>
+                                            <li><a href="{% url 'account_settings' %}">Changer Email</a></li>
+                                            <li><a href="{% url 'account_logout' %}">Se déconnecter</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="{% url 'account_delete' %}">Supprimer</a></li>
+                                            <li><a href="{% url 'account_delete' %}">Supprimer mon compte</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -50,7 +51,7 @@
             {% endblock %}
         </div>
         <div class="row-fuild" id="footer">
-            <div class="span well">
+            <div class="span12">
                 <div class="span4">
                     <h4>Company</h4>
                     <ul>
@@ -76,6 +77,7 @@
                 </div>
             </div>
         </div>
+    </div>
         {% if request.user.is_authenticated %}
         <script>
             (function () {
