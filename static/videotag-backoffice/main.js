@@ -60,6 +60,6 @@ require.config({
 define(['app', 'raven', 'poser/backbone-tastypie-0.1'], function (App) {
     Raven.config('https://1849bbdf8c80460cb4564f91f378f0d3@app.getsentry.com/92');
     //window.onerror = Raven.process;
-    App.initialize();
+    App.WidgetsList();
 });
 

@@ -24,24 +24,18 @@ define(
             Router: null,
             Spinner: new Spinner(opts),
             MainView: new MainView(),
-            Pages: new PageCollection(),
-            WidgetsList: null,
-            initialize: function(){
-                app.Pages.filters['created_by'] = require.appUser.id;
-                app.Pages.filters['limit'] = '5';
-                app.WidgetsList = new WidgetsListView({collection: app.Pages});
-                app.Pages.fetch({success: function(){app.WidgetsList.render();}});
-                app.Pages.on('add', function(page){
-                    page.save({}, {success: function(model, response){
-                        app.Router.navigate("widget/" + model.get('id'), {trigger: true});
-                        app.WidgetsList.collection.filters['created_by'] = require.appUser.id;
-                        app.WidgetsList.collection.filters['limit'] = '5';
-                        app.Pages.fetch({success: function(){
-                            app.MainView.empty();
-                            app.WidgetsList.render();
-                        }});
-                    }});
-                });
+            WidgetsList: function(){
+                require(
+                    ['modules/widget/views/widgetslist', 'page/collection'],
+                    function (WidgetsListView, PageCollection) {
+                        var widgetsListView = new WidgetsListView({collection: new PageCollection()});
+                        widgetsListView.collection.filters['created_by'] = require.appUser.id;
+                        widgetsListView.collection.filters['limit'] = '5';
+                        widgetsListView.collection.fetch({
+                            success: function(){widgetsListView.render();}.bind()
+                        });
+                    }
+                );
             }
         };
 
@@ -64,19 +58,20 @@ define(
             },
 
             addwidget: function() {
-                app.MainView.empty();
-                app.Spinner.spin(document.getElementById('main'));
                 require(
-                    ['modules/widget/views/addwidget'],
-                    function (AddWidgetView) {
-                        app.Pages.fetch({
-                            success: function(){
-                                app.Spinner.stop();
-                                var addWidgetView = new AddWidgetView({collection: app.Pages, model: app.Pages.at(0)});
-                                app.MainView.empty();
-                                app.MainView.render(addWidgetView.render(), '.commonplay-row1-col1');
-                            }.bind(this)
+                    ['modules/widget/views/addwidget', 'page/collection', 'page/model'],
+                    function (AddWidgetView, PageCollection, PageModel) {
+                        var addWidgetView = new AddWidgetView({collection: new PageCollection(), model: new PageModel()});
+                        addWidgetView.collection.on('add', function(page){
+                            page.save({},{ success: function(model, response){
+                            app.WidgetsList();
+                            app.Router.navigate("widget/" + model.get('id'), {trigger: true});
+                            }});
                         });
+                        app.Spinner.stop();
+                        app.MainView
+                            .empty()
+                            .render(addWidgetView.render(), '.commonplay-row1-col1');
                     }
                 );
             },
@@ -87,12 +82,11 @@ define(
                 require(
                     ['modules/user/views/user', 'user/model', 'modules/user/views/melomaniac', 'melomaniac/collection'],
                     function (UserView, UserModel, MelomaniacView, MelomaniacsCollection) {
-                        var user = new UserModel();
-                        user.urlRoot = user.url() + require.appUser.id;
-                        user.fetch({
+                        var userView = new UserView({model: new UserModel()})
+                        userView.model.urlRoot = userView.model.url() + require.appUser.id;
+                        userView.fetch({
                             success: function(){
                                 app.Spinner.stop();
-                                var userView = new UserView({model: user})
                                 app.MainView.empty();
                                 app.MainView.render(userView.render(), '.commonplay-row1-col1');
                             }
@@ -120,9 +114,9 @@ define(
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
                             var  page = new PageModel({id: pageId });
                             page.fetch({success: function(){
+                                var widgetView = new WidgetView({model: page});
                                 var moderatorsView = new ModeratorsView({collection: new UsersCollection(page.get('moderators'))});
                                 var speakersView = new SpeakersView({collection: new UsersCollection(page.get('speakers'))});
-                                var widgetView = new WidgetView({model: page});
                                 app.Spinner.stop();
                                 app.MainView
                                 .empty()

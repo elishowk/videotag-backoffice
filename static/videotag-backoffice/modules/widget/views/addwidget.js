@@ -6,7 +6,7 @@ define(
             tagName: 'div',
             className: 'span9',
             events : {
-                'keyup': 'validate',
+                'keypress': 'validate',
                 'keyup #url': 'checkvideo',
                 'click #btn-creation': 'addWidget'
             },

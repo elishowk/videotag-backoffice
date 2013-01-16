@@ -17,11 +17,6 @@ Backbone.View.prototype.validate = function(){
             control.find('.help-inline').text('');
         }
     }.bind(this));
-
-    if(valid === 0)
-        this.$('button').addClass('disabled');
-    else
-        this.$('button').removeClass('disabled');
 };
 
 

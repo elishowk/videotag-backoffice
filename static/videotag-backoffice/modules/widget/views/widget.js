@@ -11,9 +11,9 @@ define(
             },
             render: function() {
                 this.$el.html(_.template(tplWidget, {widget: this.model.toJSON(), baseUrl: require.appConfig.baseUrl }));
-                $.get('http://localhost:9000/poser/'+ this.model.get('path'), function(data){
+   /*             $.get('http://localhost:9000/poser/'+ this.model.get('path'), function(data){
                     this.$el.find('.snippet').text(_.template(tplSnippet, data));
-                }.bind(this));
+                }.bind(this));*/
                 return this;
             },
             publish: function(){
