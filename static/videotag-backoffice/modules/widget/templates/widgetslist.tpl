@@ -1,3 +1,4 @@
+<% if(length > 0){  %>
 <ul class="nav nav-list">
 <a class="btn btn-primary btn-large btn-block" href="#addwidget"> Créer un widget</a>
 <li class="nav-header">Mes widgets</li>
@@ -14,3 +15,6 @@
         <a > Older&rarr;</a>
     </li>
 </ul>
+<% }else {%>
+<a class="btn btn-primary btn-large btn-block" href="#addwidget">Crée ton premier widget</a>
+<%}%>

@@ -50,6 +50,7 @@ define(
             dashboard: function() {
                 if( window.location.href !== 'http://commonplay.eu/'){
                     $('.externalTemplate').show();
+                    $('#main').hide();
                 }
                 else{
                     app.MainView.empty();
@@ -124,17 +125,17 @@ define(
                                 .render(speakersView.render(), '.commonplay-row2-col3')
                                 .render(moderatorsView.render(), '.commonplay-row2-col2');
 
-                                var lives = new LivesCollection();
-                                lives.on('add', function(live){
+
+                                var livesView = new LivesView({collection: new LivesCollection()});
+                                livesView.collection.on('add', function(live){
                                     live.set('page', page.get('resource_uri'));
                                     live.save({},{success: function(){
-                                        var livesView = new LivesView({collection: lives});
                                         app.MainView.render(livesView.render(), '.commonplay-row2-col1');
                                     }});
                                 });
-                                lives.filters['page'] = pageId;
-                                lives.fetch({success: function(){
-                                    var livesView = new LivesView({collection: lives});
+                                livesView.collection.on('reset', function(){ app.MainView.render(livesView.render(), '.commonplay-row2-col1');})
+                                livesView.collection.filters['page'] = pageId;
+                                livesView.collection.fetch({success: function(){
                                     app.MainView.render(livesView.render(), '.commonplay-row2-col1');
                                 }});
                             }});

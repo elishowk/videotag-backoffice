@@ -1,4 +1,4 @@
-<a href="#liveModal" role="button" class="btn btn-primary" id="btn-liveModal" data-toggle="modal">Ajout de live !</a> 
+<a href="#liveModal" role="button" class="btn btn-primary" id="btn-liveModal" data-toggle="modal">Ajout de live !</a>
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -12,7 +12,7 @@
             <tr>
                 <td><%= date %></td>
                 <td><%= time %></td>
-                <td><button  id="btn-dellive" class="close">&times;</button></td>
+                <td><button   name="<%=live.id%>"  class="close deleteLive">&times;</button></td>
             </tr>
             <% }); %>
         </tbody>
@@ -49,7 +49,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-                <button class="btn btn-primary" id="btn-addlive" data-dismiss="modal" aria-hidden="true">Ajouter live</button>
+                <button class="btn btn-primary addLive"  data-dismiss="modal" aria-hidden="true">Ajouter live</button>
             </div>
         </div>        
 

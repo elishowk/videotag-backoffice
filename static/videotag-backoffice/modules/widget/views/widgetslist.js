@@ -32,6 +32,7 @@ define(
             },
             render: function() {
                 this.$el.html(_.template(widgetsListTpl ,{
+                    length: this.collection.length,
                     widgets : this.collection.toJSON(),
                     next: this.collection.meta.next,
                     previous: this.collection.meta.previous}));
