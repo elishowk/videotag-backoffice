@@ -19,14 +19,6 @@
 </div>
 </div>
 
-<div class="control-group" id="control-email">
-<label class="control-label" for="email">Votre E-mail: </label>                            
-<div class="controls">
-<input type="text" id="email" value ="<%= email %>" placeholder="<%= email %>">
-<span class="help-inline"></span>                                    
-</div>
-</div>
-
 <div class="control-group" id="control-username">
 <label class="control-label" for="username">Pseudo: </label>                            
 <div class="controls">
