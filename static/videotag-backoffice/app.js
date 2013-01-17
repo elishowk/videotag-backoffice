@@ -132,7 +132,7 @@ define(
                                         app.MainView.render(livesView.render(), '.commonplay-row2-col1');
                                     }});
                                 });
-                                livesView.collection.on('reset', function(){ app.MainView.render(livesView.render(), '.commonplay-row2-col1');})
+                                livesView.collection.on('remove', function(){ app.MainView.render(livesView.render(), '.commonplay-row2-col1');})
                                 livesView.collection.filters['page'] = pageId;
                                 livesView.collection.fetch({success: function(){
                                     app.MainView.render(livesView.render(), '.commonplay-row2-col1');

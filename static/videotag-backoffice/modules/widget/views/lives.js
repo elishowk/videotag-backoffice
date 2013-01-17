@@ -7,7 +7,7 @@ define(
             className: 'span4',
             events: {
                 'click .addLive': 'addlive',
-                'click .deleteLive': 'dellive'
+                'click .deleteLive': 'dellive',
             },
             addlive : function(e) {
                 e.preventDefault();
@@ -15,7 +15,9 @@ define(
             },
             dellive : function(e) {
                 e.preventDefault();
-                this.collection.remove(this.collection.get(e.target.name));
+                console.log('toto');
+                this.collection.getById(e.target.name).destroy();
+                this.collection.remove(this.collection.getById(e.target.name));
             },
             render : function() {
                 this.$el.html(_.template(tplLives, { lives : this.collection.toJSON()}));
