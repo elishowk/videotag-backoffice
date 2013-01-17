@@ -11,6 +11,7 @@ require.config({
         'underscore':   'lib/lodash-1.0.0.min',
         'spin': 'lib/spin-1.2.7',
         'backbone-validation': 'lib/backbone-validation-0.6.2',
+        'jquery-validation': 'lib/jquery-validation-1.10.0/dist/jquery.validate.min',
         'bootstrap': 'lib/bootstrap-2.2.2',
         'bootstrap-datepicker': 'lib/bootstrap-datepicker-2.0/js/bootstrap-datepicker-2.0',
         'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0/js/bootstrap-timepicker-2.0',

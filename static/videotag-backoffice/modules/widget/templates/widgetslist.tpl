@@ -8,8 +8,8 @@
 </ul>
 
 <ul class="pager">
-    <% if(previous != null){%> <li><a class="previous">Previous</a></li><%}%>
-    <% if(next != null){%> <li><a  class="next">Next</a></li><%}%>
+    <% if(previous != null){%> <li><a class="previous btn">Previous</a></li><%}%>
+    <% if(next != null){%> <li><a  class="next btn">Next</a></li><%}%>
 </ul>
 <% }else {%>
 <a class="btn btn-primary btn-large btn-block" href="#addwidget">Crée ton premier widget</a>
