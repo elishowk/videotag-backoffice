@@ -17,6 +17,7 @@
         <% }); %>
     </tbody>
 </table>
+
 <!-- Modal -->
 <div id="liveModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-live" aria-hidden="true">
     <div class="modal-header">
@@ -27,29 +28,29 @@
         </p>
     </div>
     <div class="modal-body">
-        <form  class="form" action="/" >
+        <form  class="form" id="formAddLive" action="/" >
             <fieldset>
-                <div class="control-group" id ="control-date_live">
-                    <label class="control-label" for="date_live">Date: </label>
+
+                <div class="control-group">
+                    <label class="control-label" for="datepicker">Date: </label>
                     <div class="controls">
-                        <input type="text" value="2012-12-25" id="datepicker" class="input-small">
-                        <span class="help-inline"></span>
+                        <input type="text" name="date" id="datepicker">
                     </div>
                 </div>
 
-                <div class="control-group" id="control-time_live">
-                    <label class="control-label" for="time_live">Heure: </label>
+                <div class="control-group">
+                    <label class="control-label" for="timepicker">Heure: </label>
                     <div class="controls">
-                        <input type="text"  id="timepicker" class="input-small">
-                        <span class="help-inline"></span>
+                        <input type="text" name='time' id="timepicker">
                     </div>
                 </div>
+
+                 <input class="submit btn btn-primary" type="submit" value="Ajouter live"/>
             </fieldset>
         </form>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Annuler</button>
-        <button class="btn btn-primary addLive"  data-dismiss="modal" aria-hidden="true">Ajouter live</button>
     </div>
 </div>
 
