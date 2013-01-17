@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'modules/widget/templates/lives.tpl', 'bootstrap-datepicker', 'bootstrap-timepicker' ],
+    ['backbone', 'modules/widget/templates/lives.tpl', 'bootstrap-datepicker', 'bootstrap-timepicker', 'jquery-validation'],
     function(Backbone, tplLives) {
         'use strict';
         return Backbone.View.extend({
