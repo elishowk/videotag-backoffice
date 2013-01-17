@@ -129,7 +129,7 @@ define(
                                 livesView.collection.on('add', function(live){
                                     live.set('page', page.get('resource_uri'));
                                     live.save({},{success: function(){
-                                        app.MainView.render(livesView.render(), '.commonplay-row2-col1');
+                                        window.location.reload();
                                     }});
                                 });
                                 livesView.collection.on('remove', function(){ app.MainView.render(livesView.render(), '.commonplay-row2-col1');})

@@ -9,23 +9,23 @@ define(
                 'click .deleteLive': 'dellive',
             },
             addlive : function(e) {
-                e.preventDefault();
             },
             dellive : function(e) {
                 e.preventDefault();
                 console.log('toto');
                 this.collection.getById(e.target.name).destroy();
                 this.collection.remove(this.collection.getById(e.target.name));
+                window.location.reload();
             },
             render : function() {
+                var that = this;
                 this.$el.html(_.template(tplLives, { lives : this.collection.toJSON()}));
                 this.$el.find('#datepicker').datepicker({format: 'yyyy-mm-dd'});
                 this.$el.find('#timepicker').timepicker({ showSeconds: true, showMeridian:false });
-                this.$el.find('#addWidgetForm').validate({
+                this.$el.find('#formAddLive').validate({
                     rules: {
                         time: {
                             required: true,
-                            //youtubeVideo: true
                         },
                         date: {
                             required: true,
@@ -40,7 +40,8 @@ define(
                         .closest('.control-group').addClass('success');
                     },
                     submitHandler: function(form) {
-                this.collection.add({start : this.$('#datepicker').val()+ 'T'+ this.$('#timepicker').val() });
+                that.collection.add({start : that.$el.find('#datepicker').val()+ 'T'+ that.$el.find('#timepicker').val() });
+                 that.$el.find('#liveModal').modal('hide');
                     }
                 });
 
