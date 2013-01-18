@@ -35,7 +35,7 @@
         <div class="control-group">
             <label class="control-label" for="website">Site web: </label>
             <div class="controls">
-                <input type="text" name="website" class="url"id="website" value='<%= website %> ' placeholder='<%= website %>'>
+                <input type="text" name="website" class="url"id="website" value='<%= website %>' placeholder='<%= website %>'>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
         <div class="control-group">
             <label class="control-label" for="about_me">A Propos: </label>
             <div class="controls">
-                <textarea type="text" id="about_me" name="aboutMe" value='<%= about_me %> ' placeholder='<%= about_me %>'rows="3"></textarea>
+                <textarea type="text" id="about_me" name="aboutMe" value='<%= about_me %>' placeholder='<%= about_me %>'rows="3"></textarea>
             </div>
         </div>
                 <button type="submit" class="btn">Modifier</button>

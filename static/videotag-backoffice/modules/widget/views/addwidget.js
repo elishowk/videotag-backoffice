@@ -5,8 +5,9 @@ define(
         return Backbone.View.extend({
             tagName: 'div',
             className: 'span9',
+            initialize: function(){ this.validVideo = false; },
             events : {
-                'keyup #url': 'checkvideo',
+                'change #curl': 'checkVideo',
                 'click #btn-creation': 'addWidget'
             },
             addWidget: function(e) {
@@ -20,27 +21,26 @@ define(
                 });
             },
 
-            checkvideo: function(e){
-                /*this.$('#type').addClass('alert-success');
-                  this.$('#type').text('La vidéo à bien été reconnue comme appartenant à Youtube');
-
-                  this.$('#type').addClass('alert-error');
-                  this.$('#type').text("La vidéo n'as pas été reconnu !");
-                  */
+            checkVideo: function(){
+                var id= parseUri(this.$el.find('#curl').val()).queryKey.v;
+                $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+id+'?v=2&alt=json', function(data) {
+                    if(!this.$el.find('#ctitle').val())
+                        this.$el.find('#ctitle').val(data.entry.title.$t);
+                    this.$el.find('.modal-body').html('<iframe id="ytplayer" type="text/html" width="450" height="253.125" src="https://www.youtube.com/embed/'+id+'"frameborder="0" >');
+                    this.validVideo=true;
+                    this.$el.find('#addWidgetForm').valid();
+                }.bind(this)).error(function() {
+                    this.validVideo=false;
+                    this.$el.find('#addWidgetForm').valid();
+                }.bind(this));
             },
+
             render : function() {
-                /*$.validator.addMethod('youtubeVideo', function(value, element) {
-                  var id= parseUri(that.$el.find('#curl').val()).queryKey.v;
-                  var test;
-                  $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+id+'?v=2&alt=json', function(data) {
-                  that.$el.find('#ctitle').val(data.entry.title.$t);
-                  that.$el.find('.modal-body').html('<iframe id="ytplayer" type="text/html" width="450" height="253.125" src="https://www.youtube.com/embed/'+id+'"frameborder="0" >');
-                  test = true;
-                  })
-                  .error(function() { test = false;  return this.optional(element)}.bind(this));
-                  return test;
-                  }, 'Vidéo youtube non reconnue');
-                  */
+                var testVideo = false;
+                $.validator.addMethod('youtubeVideo', function(value, element) {
+                    return this.validVideo;
+                }.bind(this), 'Vidéo youtube non reconnue');
+
                 var that = this;
                 this.$el.html(_.template(tplAddWidget, { widgets : this.collection.toJSON()}));
                 this.$el.find('#addWidgetForm').validate({
@@ -48,8 +48,8 @@ define(
                         url: {
                             minlength: 2,
                             required: true,
-                            url: true
-                            //youtubeVideo: true
+                            url: true,
+                            youtubeVideo: true
                         },
                         permalink: {
                             required: true,
@@ -65,14 +65,8 @@ define(
                         .closest('.control-group').addClass('success');
                     },
                     submitHandler: function(form) {
-                        var id= parseUri(that.$el.find('#curl').val()).queryKey.v;
-                        $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+id+'?v=2&alt=json', function(data) {
-                            if(!that.$el.find('#ctitle').val())
-                            that.$el.find('#ctitle').val(data.entry.title.$t);
-                            that.$el.find('.modal-body').html('<iframe id="ytplayer" type="text/html" width="450" height="253.125" src="https://www.youtube.com/embed/'+id+'"frameborder="0" >');
-                            that.$el.find('#videoModal').modal();
-                        })
-                        .error(function() {alert('Vidéo youtube non reconnue')});
+                        that.checkVideo();
+                        that.$el.find('#videoModal').modal();
                     }
                 });
                 return this;

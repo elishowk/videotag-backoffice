@@ -1,6 +1,6 @@
 <legend>
-    <h2>Edition de Widget</h2>
-    <h4> <%=widget.title%> </h4>
+    <h3>Edition: <%=widget.title%></h3>
+    <h4><%=widget.permalink%></h4>
 </legend>
 
 <h4>Le code Javascript à importer</h4>
