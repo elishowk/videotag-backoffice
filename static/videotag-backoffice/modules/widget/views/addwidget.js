@@ -67,6 +67,7 @@ define(
                     submitHandler: function(form) {
                         var id= parseUri(that.$el.find('#curl').val()).queryKey.v;
                         $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+id+'?v=2&alt=json', function(data) {
+                            if(!that.$el.find('#ctitle').val())
                             that.$el.find('#ctitle').val(data.entry.title.$t);
                             that.$el.find('.modal-body').html('<iframe id="ytplayer" type="text/html" width="450" height="253.125" src="https://www.youtube.com/embed/'+id+'"frameborder="0" >');
                             that.$el.find('#videoModal').modal();

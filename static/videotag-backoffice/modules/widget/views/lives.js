@@ -8,11 +8,8 @@ define(
             events: {
                 'click .deleteLive': 'dellive',
             },
-            addlive : function(e) {
-            },
             dellive : function(e) {
                 e.preventDefault();
-                console.log('toto');
                 this.collection.getById(e.target.name).destroy();
                 this.collection.remove(this.collection.getById(e.target.name));
                 window.location.reload();
@@ -40,8 +37,8 @@ define(
                         .closest('.control-group').addClass('success');
                     },
                     submitHandler: function(form) {
-                that.collection.add({start : that.$el.find('#datepicker').val()+ 'T'+ that.$el.find('#timepicker').val() });
-                 that.$el.find('#liveModal').modal('hide');
+                        that.collection.add({start : that.$el.find('#datepicker').val()+ 'T'+ that.$el.find('#timepicker').val() });
+                        that.$el.find('#liveModal').modal('hide');
                     }
                 });
 

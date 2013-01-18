@@ -2,76 +2,56 @@
     <fieldset>
         <legend>Informations</legend>
 
-        <div class="control-group" id ="control-birth_date">
+        <div class="control-group">
             <label class="control-label" for="birth_date">Date de naissance: </label>
             <div class="controls">
-                <input type="text" id="birth_date" value='<%= birth_date %>'  placeholder='<%= birth_date %>'>
-                <span class="help-inline"></span>
+                <input type="text" name="birthDate" id="birth_date" value='<%= birth_date %>'  placeholder='<%= birth_date %>'>
             </div>
         </div>
 
-        <div class="control-group" id ="control-address">
+        <div class="control-group">
             <label class="control-label" for="address">Adresse: </label>
             <div class="controls">
-            <input type="text" id="address" value='<%= address %>' placeholder='<%= address %>'>
-                <span class="help-inline"></span>
+                <input type="text" name="address" id="address" value='<%= address %>' placeholder='<%= address %>'>
             </div>
         </div>
 
-        <div class="control-group" id ="control-">
-            <label class="control-label" for="">Code Postal: </label>
-            <div class="controls">
-                <input type="text" id="address" value='<%= address %>' placeholder='<%= address %>'>
-                <span class="help-inline"></span>
-            </div>
-        </div>
-
-        <div class="control-group" id ="control-city">
+        <div class="control-group">
             <label class="control-label" for="city">Ville: </label>
             <div class="controls">
-                <input type="text" id="city" value='<%= city %>' placeholder='<%= city %>'>
-                <span class="help-inline"></span>
+                <input type="text" name="city" id="city" value='<%= city %>' placeholder='<%= city %>'>
             </div>
         </div>
 
 
-        <div class="control-group" id ="control-country">
+        <div class="control-group">
             <label class="control-label" for="country">Pays: </label>
             <div class="controls">
-                <input type="text" id="country" value='<%= country %>' placeholder='<%= country %>'>
-                <span class="help-inline"></span>
+                <input type="text" name="country" id="country" value='<%= country %>' placeholder='<%= country %>'>
             </div>
         </div>
 
 
-        <div class="control-group" id ="control-website">
+        <div class="control-group">
             <label class="control-label" for="website">Site web: </label>
             <div class="controls">
-                <input type="text" class="url "id="website" value='<%= website %> ' placeholder='<%= website %>'>
-                <span class="help-inline"></span>
+                <input type="text" name="website" class="url "id="website" value='<%= website %> ' placeholder='<%= website %>'>
             </div>
         </div>
 
-        <div class="control-group" id ="control-tel">
+        <div class="control-group">
             <label class="control-label" for="tel">Téléphone: </label>
             <div class="controls">
-                <input type="text" id="tel" value='<%= tel %>' placeholder='<%= tel %>'>
-                <span class="help-inline"></span>
+                <input type="text" id="tel" name="tel" value='<%= tel %>' placeholder='<%= tel %>'>
             </div>
         </div>
 
-        <div class="control-group" id ="control-about_me">
+        <div class="control-group">
             <label class="control-label" for="about_me">A Propos: </label>
             <div class="controls">
-                <textarea type="text" id="about_me" value='<%= about_me %> ' placeholder='<%= about_me %>'rows="3"></textarea>
-                <span class="help-inline"></span>
+                <textarea type="text" id="about_me" name="aboutMe" value='<%= about_me %> ' placeholder='<%= about_me %>'rows="3"></textarea>
             </div>
         </div>
-        <div class="control-group">
-            <div class="controls">
                 <button type="submit" class="btn">Modifier</button>
-            </div>
-        </div>
-
     </fieldset>
 </form>
