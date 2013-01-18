@@ -2,27 +2,28 @@
     <fieldset>
         <legend>Créez un widget</legend>
         <div class="control-group">
-            <label class="control-label" for="curl">Url de la vidéo: </label>
+            <label class="control-label" for="curl">Url youtube: </label>
             <div class="controls">
                 <input type="text" name="url" id="curl">
             </div>
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="cpermalink">Permalien: </label>
+            <label class="control-label" for="cpermalink">Url de votre site: </label>
             <div class="controls">
                 <input type="text" name="permalink" id="cpermalink">
             </div>
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="ctitle">Titre: </label>
+            <label class="control-label" for="ctitle">Titre du widget: </label>
             <div class="controls">
                 <input type="text" name="title" id="ctitle">
+                <span class="help-inline">Par défaut le titre de la video youtube.</span>
             </div>
         </div>
 
-         <input class="submit btn btn-primary" type="submit" value="Creation"/>
+         <input class="submit btn btn-primary" type="submit" value="Valider vidéo""/>
 
 <fieldset>
 </form>
@@ -41,7 +42,7 @@
                     <p>Aucune preview disponible pour votre vidéo</p>
                 </div>
                 <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Modifier vidéo</button>
-            <button class="btn btn-primary" id="btn-creation" data-dismiss="modal" aria-hidden="true">Creer Widget</button>
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Modifier</button>
+            <button class="btn btn-primary" id="btn-creation" data-dismiss="modal" aria-hidden="true">Ok</button>
             </div>
         </div> 

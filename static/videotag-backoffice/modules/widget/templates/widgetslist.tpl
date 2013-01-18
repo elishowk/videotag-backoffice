@@ -12,5 +12,5 @@
     <% if(next != null){%> <li><a  class="next btn">Next</a></li><%}%>
 </ul>
 <% }else {%>
-<a class="btn btn-primary btn-large btn-block" href="#addwidget">Crée ton premier widget</a>
+<a class="btn btn-primary btn-large btn-block" href="#addwidget">Créé votre premier widget</a>
 <%}%>

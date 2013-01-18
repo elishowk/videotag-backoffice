@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'modules/user/templates/melomaniac.tpl', 'jquery-validation'],
+    ['backbone', 'modules/user/templates/melomaniac.tpl', 'jquery-validation', 'bootstrap-datepicker'],
     function(Backbone, tplMelomaniac) {
         'use strict';
         return Backbone.View.extend({
@@ -11,13 +11,16 @@ define(
             render : function() {
                 var that = this;
                 this.$el.html(_.template(tplMelomaniac,  this.model.toJSON()));
+                this.$el.find('#birth_date').datepicker({format: 'yyyy-mm-dd'});
                 this.$el.find('#formMelomaniac').validate({
                     rules: {
                     },
                     highlight: function(label) {
+                        that.$el.find(label).closest('.control-group').removeClass('success');
                         that.$el.find(label).closest('.control-group').addClass('error');
                     },
                     success: function(label) {
+                        that.$el.find(label).closest('.control-group').removeClass('error');
                         label
                         .text('OK!').addClass('valid')
                         .closest('.control-group').addClass('success');
@@ -33,7 +36,7 @@ define(
                         },
                         {error : _.bind(that.error, that) });
                         that.model.save();
-                        alert("Vos informations ont été modif")
+                        window.location.reload();
                     }
                 });
                 return this;

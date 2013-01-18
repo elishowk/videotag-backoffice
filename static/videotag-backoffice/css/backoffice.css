@@ -7,12 +7,15 @@ body
     margin-left: 10%;
 }
 .widgetslist{
-    border-right-style:solid;
-    border-right-width:2px;
 }
 #main-div
 {
     overflow:auto;
+}
+.layout{
+    border-left-style:double;
+    border-left-width:5px;
+    padding-left: 10px;
 }
 #header{
     position:relative;

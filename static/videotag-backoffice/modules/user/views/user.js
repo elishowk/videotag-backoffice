@@ -21,9 +21,11 @@ define(
                     rules: {
                     },
                     highlight: function(label) {
+                        that.$el.find(label).closest('.control-group').removeClass('success');
                         that.$el.find(label).closest('.control-group').addClass('error');
                     },
                     success: function(label) {
+                        that.$el.find(label).closest('.control-group').removeClass('error');
                         label
                         .text('OK!').addClass('valid')
                         .closest('.control-group').addClass('success');
@@ -37,7 +39,7 @@ define(
                         },
                         {error : _.bind(that.error, that) });
                         that.model.save();
-                        alert("Vos informations ont été modif")
+                        window.location.reload();
                     }
                 });
                 return this;

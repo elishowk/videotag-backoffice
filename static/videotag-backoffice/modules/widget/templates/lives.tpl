@@ -1,4 +1,4 @@
-<a href="#liveModal" role="button" class="btn btn-primary" id="btn-liveModal" data-toggle="modal">Ajout de live !</a>
+<a href="#liveModal" role="button" class="btn btn-primary" id="btn-liveModal" data-toggle="modal">Ajout de live</a>
 <table class="table table-condensed">
     <thead>
         <tr>

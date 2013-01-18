@@ -57,9 +57,11 @@ define(
                         }
                     },
                     highlight: function(label) {
+                        that.$el.find(label).closest('.control-group').removeClass('success');
                         that.$el.find(label).closest('.control-group').addClass('error');
                     },
                     success: function(label) {
+                        that.$el.find(label).closest('.control-group').removeClass('error');
                         label
                         .text('OK!').addClass('valid')
                         .closest('.control-group').addClass('success');
