@@ -1,6 +1,6 @@
 <legend>
-    <h3>Edition: <%=widget.title%></h3>
-    <h4><%=widget.permalink%></h4>
+    <h3><%=widget.title%></h3>
+    <h5><a href="<%=widget.permalink%>" target="blank"><%=widget.permalink%></a> </h5>
 </legend>
 
 <h4>Importez ce code sur votre site</h4>
