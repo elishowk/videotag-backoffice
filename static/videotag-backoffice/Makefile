@@ -12,7 +12,6 @@ build: clean templates
 clean:
 	@echo "\033[01;32m[INFO]\033[0m" clean up...
 	@rm -vfr build
-	@rm -vfr main.js
 	@rm -vfr $(CONVERTED_TEMPLATES)
 
 templates: $(wildcard TEMPLATES)
