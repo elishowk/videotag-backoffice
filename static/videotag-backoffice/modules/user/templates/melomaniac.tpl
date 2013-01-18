@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="/" >
+<form class="form-horizontal" id="formMelomaniac" action="/" >
     <fieldset>
         <legend>Informations</legend>
 
@@ -35,7 +35,7 @@
         <div class="control-group">
             <label class="control-label" for="website">Site web: </label>
             <div class="controls">
-                <input type="text" name="website" class="url "id="website" value='<%= website %> ' placeholder='<%= website %>'>
+                <input type="text" name="website" class="url"id="website" value='<%= website %> ' placeholder='<%= website %>'>
             </div>
         </div>
 

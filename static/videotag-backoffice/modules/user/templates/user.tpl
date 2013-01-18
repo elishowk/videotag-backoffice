@@ -1,5 +1,5 @@
 <div id='avatar'></div>
-<form  class="form-horizontal" action="/" >
+<form  class="form-horizontal" id="formUser" action="/" >
     <fieldset>
     <legend>Profile</legend>
 
@@ -20,7 +20,7 @@
     <div class="control-group">
         <label class="control-label" for="username">Pseudo: </label>
         <div class="controls">
-            <input type="text" name="userName" id="username" value="<%= username %>" placeholder="<%= username %>">
+            <input type="text" class="required" name="userName" id="username" value="<%= username %>" placeholder="<%= username %>">
         </div>
     </div>
 
