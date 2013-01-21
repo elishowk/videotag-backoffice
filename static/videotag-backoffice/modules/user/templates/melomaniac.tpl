@@ -3,16 +3,9 @@
         <legend>Informations</legend>
 
         <div class="control-group">
-            <label class="control-label" for="birth_date">Date de naissance: </label>
-            <div class="controls">
-                <input type="text" name="birthDate" id="birth_date" value='<%= birth_date %>'  placeholder='<%= birth_date %>'>
-            </div>
-        </div>
-
-        <div class="control-group">
             <label class="control-label" for="address">Adresse: </label>
             <div class="controls">
-                <input type="text" name="address" id="address" value='<%= address %>' placeholder='<%= address %>'>
+                <input type="text" name="address" id="address" value='<%= address1 %>' placeholder='<%= address1 %>'>
             </div>
         </div>
 
@@ -23,6 +16,12 @@
             </div>
         </div>
 
+        <div class="control-group">
+            <label class="control-label" for="zipcode">Code postal: </label>
+            <div class="controls">
+                <input type="text" name="zipcode" id="zipcode" value='<%= zipcode %>' placeholder='<%= zipcode %>'>
+            </div>
+        </div>
 
         <div class="control-group">
             <label class="control-label" for="country">Pays: </label>
@@ -49,9 +48,24 @@
         <div class="control-group">
             <label class="control-label" for="about_me">A Propos: </label>
             <div class="controls">
-                <textarea type="text" id="about_me" name="aboutMe" value='<%= about_me %>' placeholder='<%= about_me %>'rows="3"></textarea>
+                <input type="text" id="about_me" name="aboutMe" value='<%= about_me %>' placeholder='<%= about_me %>'rows="3">
             </div>
         </div>
-                <button type="submit" class="btn">Modifier</button>
+
+        <div class="control-group">
+            <label class="control-label" for="facebook">ID facebook: </label>
+            <div class="controls">
+                <input type="text" name="facebook" id="facebook" value='<%= facebook %>' placeholder='<%= facebook %>'>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="twitter">ID twitter: </label>
+            <div class="controls">
+                <input type="text" name="twitter" id="twitter" value='<%= twitter %>' placeholder='<%= twitter %>'>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Modifier</button>
     </fieldset>
 </form>

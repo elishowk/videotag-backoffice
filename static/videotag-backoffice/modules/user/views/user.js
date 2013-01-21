@@ -38,8 +38,7 @@ define(
                             email : that.$el.find('#email').val()
                         },
                         {error : _.bind(that.error, that) });
-                        that.model.save();
-                        window.location.reload();
+                        that.model.save({},{ success: function(){ window.location.reload();}});
                     }
                 });
                 return this;
