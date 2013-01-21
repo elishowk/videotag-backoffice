@@ -1,5 +1,4 @@
-
-<div class="row-fluid well">
+<div class="span12">
     <div class="span3 widgetslist"></div><!--/span3-->
     <div class="span9 layout" >
         <div class="row-fluid commonplay-row1">

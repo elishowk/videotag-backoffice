@@ -50,7 +50,7 @@ define(
             dashboard: function() {
                 if( window.location.href !== 'http://commonplay.eu/'){
                     $('.externalTemplate').show();
-                    $('#main').hide();
+                    $('#mainDiv').hide();
                 }
                 else{
                     app.MainView.empty();

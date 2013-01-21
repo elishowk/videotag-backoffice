@@ -13,7 +13,7 @@
     </head>
     <body>
     <div class = "container-fluid">
-        <div class="row-fluid" id="mainDiv">
+        <div class="row-fluid">
             <div class="row-fluid" id="header">
                 <a href="/" >
                      <img class="logo"  src="{% get_static_prefix %}videotag-backoffice/img/logo.svg" alt="Logo CommonPlay" />
@@ -46,37 +46,37 @@
                     </div>
                 </div>
             </div>
+            <div clas="rowfluid" id="mainDiv"></div>
             {% block body %}
                 <div class="row-fluid"><div class='externalTemplate'>{% block template %}{% endblock %}</div></div>
             {% endblock %}
-        </div>
         <div class="row-fuild">
             <div class = 'span12'>
-            <div>
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Contact</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Resource</h4>
-                <ul>
-                    <li><a href="">Get help</a></li>
-                    <li><a href="">FAQ</a></li>
-                    <li><a href="">Support</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Connect</h4>
-                <ul>
-                    <li><a href="" title="Facebook">Facebook</a></li>
-                    <li><a href="" title="Twitter">Twitter</a></li>
-                    <li><a href="" title="Blogs">Blogs</a></li>
-                </ul>
+                <div class="span4">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Resource</h4>
+                    <ul>
+                        <li><a href="">Get help</a></li>
+                        <li><a href="">FAQ</a></li>
+                        <li><a href="">Support</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="" title="Facebook">Facebook</a></li>
+                        <li><a href="" title="Twitter">Twitter</a></li>
+                        <li><a href="" title="Blogs">Blogs</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     </div>
         {% if request.user.is_authenticated %}
         <script>
