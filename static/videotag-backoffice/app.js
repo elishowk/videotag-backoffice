@@ -48,7 +48,7 @@ define(
             },
 
             dashboard: function() {
-                if( window.location.href !== 'http://commonplay.eu/'){
+                if(window.location.hash){
                     $('.externalTemplate').show();
                     $('#mainDiv').hide();
                 }
