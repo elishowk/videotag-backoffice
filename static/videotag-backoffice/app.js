@@ -48,13 +48,13 @@ define(
             },
 
             dashboard: function() {
-                if(window.location.hash){
-                    $('.externalTemplate').show();
-                    $('#mainDiv').hide();
-                }
-                else{
+                if( window.location.pathname.indexOf("account")== -1){
                     app.MainView.empty();
                     $('.commonplay-row1-col1').html('<div class="hero-unit"><h1>Välkommen, '+require.appUser.username+'!</h1></div>');
+                }
+                else{
+                    $('.externalTemplate').show();
+                    $('#mainDiv').hide();
                 }
             },
 
