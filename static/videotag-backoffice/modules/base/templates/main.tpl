@@ -1,6 +1,6 @@
 <div class="span12 layout">
     <div class="span3 widgetslist"></div><!--/span3-->
-    <div class="span9" >
+    <div class="span9 grid" >
         <div class="row-fluid commonplay-row1">
             <div class="data-div commonplay-row1-col1" ></div><!--/span-->
             <div class="data-div commonplay-row1-col2" ></div><!--/span-->

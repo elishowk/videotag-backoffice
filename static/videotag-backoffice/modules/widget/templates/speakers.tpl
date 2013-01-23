@@ -9,11 +9,11 @@
     <tbody>
         <% _.each(speakers, function(speaker) { %>
         <tr>
-            <td  title="<%=speaker.email%>" speaker-id=<%=speaker.id%> class='td-speaker'>
-                <% if((speaker.email).length < 14){%>
-                    <%= speaker.email %>
+            <td  title="<%=speaker.username%>" speaker-id=<%=speaker.id%> class='td-speaker'>
+                <% if(speaker.is_active == true){%>
+                    <%= speaker.username %>
                 <%} else {%>
-                   <%= speaker.email.substring(0,13)%>...
+                   <%=  speaker.username %>(XX)
                 <%}%>
             </td>
             <td><button  id="btn-delspeaker" speaker-id=<%=speaker.id%> class="close">&times;</button><td>

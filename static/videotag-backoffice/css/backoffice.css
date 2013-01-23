@@ -6,12 +6,15 @@ body
     margin-right: 10%;
     margin-left: 10%;
 }
-.widgetslist{
+.grid{
+   border-left-style:double;
+    border-left-width:5px;
+    padding-left: 10px;
 }
 .layout{
     border-radius: 10px;
     background-color : whitesmoke;
-    padding-top: 15px; 
+    padding: 15px; 
 
 }
 #header{
@@ -25,11 +28,15 @@ body
 }
 #footer
 {
+    margin-top: 15px;
+    border-radius: 10px;
+    background-color : whitesmoke;
+    padding-top: 15px; 
+    padding-left: 15%;
 }
 label.valid {
     width: 24px;
     height: 24px;
-    background: url(assets/img/valid.png) center center no-repeat;
     display: inline-block;
     text-indent: -9999px;
 }
@@ -38,7 +45,5 @@ label.error {
     color: red;
     padding: 2px 8px;
     margin-top: 2px;
-   border-left-style:double;
-    border-left-width:5px;
-    padding-left: 10px;
-}
+}n 18 10:54 main.js
+drwxr-xr-x 6 matthieuhanne

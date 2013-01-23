@@ -48,13 +48,13 @@ define(
             },
 
             dashboard: function() {
-                if( window.location.href !== 'http://commonplay.eu/'){
-                    $('.externalTemplate').show();
-                    $('#mainDiv').hide();
-                }
-                else{
+                if( window.location.pathname.indexOf("account")== -1){
                     app.MainView.empty();
                     $('.commonplay-row1-col1').html('<div class="hero-unit"><h1>Välkommen, '+require.appUser.username+'!</h1></div>');
+                }
+                else{
+                    $('.externalTemplate').show();
+                    $('#mainDiv').hide();
                 }
             },
 
@@ -69,7 +69,6 @@ define(
                             app.Router.navigate("widget/" + model.get('id'), {trigger: true});
                             }});
                         });
-                        app.Spinner.stop();
                         app.MainView
                             .empty()
                             .render(addWidgetView.render(), '.commonplay-row1-col1');
@@ -79,12 +78,11 @@ define(
 
             account: function() {
                 app.MainView.empty();
-                app.Spinner.spin(document.getElementById('main'));
+                app.Spinner.spin(document.getElementById('mainDiv'));
                 require(
                     ['modules/user/views/user', 'user/model', 'modules/user/views/melomaniac', 'melomaniac/collection'],
                     function (UserView, UserModel, MelomaniacView, MelomaniacsCollection) {
                         var userView = new UserView({model: new UserModel()})
-                        userView.model.urlRoot = userView.model.url() + require.appUser.id;
                         userView.model.fetch({
                             success: function(){
                                 app.Spinner.stop();

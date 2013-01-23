@@ -9,11 +9,11 @@
     <tbody>
         <% _.each(moderators, function(moderator) { %>
         <tr>
-            <td  title="<%=moderator.email%>" class='td-moderator'>
-                <% if((moderator.email).length < 14){%>
-                    <%= moderator.email %>
+            <td  title="<%=moderator.username%>" class='td-moderator'>
+                <% if(moderator.is_active == true){%>
+                    <%= moderator.username %>
                 <%} else {%>
-                   <%= moderator.email.substring(0,13)%>...
+                   <%=  moderator.username %>(XX)
                 <%}%>
             </td>
             <td><button  id="btn-delmoderator" class="close">&times;</button><td>

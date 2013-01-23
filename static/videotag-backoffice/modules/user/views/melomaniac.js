@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'modules/user/templates/melomaniac.tpl', 'jquery-validation', 'bootstrap-datepicker'],
+    ['backbone', 'modules/user/templates/melomaniac.tpl', 'jquery-validation'],
     function(Backbone, tplMelomaniac) {
         'use strict';
         return Backbone.View.extend({
@@ -11,7 +11,6 @@ define(
             render : function() {
                 var that = this;
                 this.$el.html(_.template(tplMelomaniac,  this.model.toJSON()));
-                this.$el.find('#birth_date').datepicker({format: 'yyyy-mm-dd'});
                 this.$el.find('#formMelomaniac').validate({
                     rules: {
                     },
@@ -27,16 +26,18 @@ define(
                     },
                     submitHandler: function(form) {
                         that.model.set({
-                            phone: that.$el.find('#phone').val(),
+                            tel: that.$el.find('#tel').val(),
                             website: that.$el.find('#website').val(),
                             about_me: that.$el.find('#about_me').val(),
+                            address1: that.$el.find('#address').val(),
                             city: that.$el.find('#city').val(),
                             country: that.$el.find('#country').val(),
-                            gender: that.$el.find('#gender').val()
+                            zipcode: that.$el.find('#zipcode').val(),
+                            facebook: that.$el.find('#facebook').val(),
+                            twitter: that.$el.find('#twitter').val(),
                         },
                         {error : _.bind(that.error, that) });
-                        that.model.save();
-                        window.location.reload();
+                        that.model.save({},{ success: function(){ window.location.reload();}});
                     }
                 });
                 return this;
