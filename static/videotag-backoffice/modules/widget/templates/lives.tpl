@@ -23,8 +23,10 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="ModalLabel-live">Ajout de live !</h3>
+        </br>
         <p>
-            Informations sur les lives
+            Rassemblez votre audience autour de votre vidéo à la date et l'heure de votre choix.</br></br>
+            <em>Quelque soit le moment où ils se connectent, tous les internautes sont assurés de se retrouver au meme instant de la vidéo</em>
         </p>
     </div>
     <div class="modal-body">
@@ -34,14 +36,14 @@
                 <div class="control-group">
                     <label class="control-label" for="datepicker">Date: </label>
                     <div class="controls">
-                        <input type="text" name="date" id="datepicker">
+                        <input type="text" class="input-xlarge" placeholder="Choisissez la date de votre évenement" name="date" id="datepicker">
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label" for="timepicker">Heure: </label>
                     <div class="controls">
-                        <input type="text" name='time' id="timepicker">
+                        <input type="text" class="input-xlarge" placeholder="Programmez l'heure de début" name='time' id="timepicker">
                     </div>
                 </div>
 

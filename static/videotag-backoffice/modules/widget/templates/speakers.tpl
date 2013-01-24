@@ -1,4 +1,4 @@
-<a href="#speakerModal" role="button" class="btn btn-primary" id="btn-speakerModal" data-toggle="modal">Ajouter un speaker</a> 
+<a href="#speakerModal" role="button" class="btn btn-primary" id="btn-speakerModal" data-toggle="modal">Ajouter une personnalité</a> 
 
 <table class="table table-condensed">
     <thead>
@@ -26,9 +26,12 @@
 <div id="speakerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-speaker" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <legend id="ModalLabel-speaker">Ajout de speaker !</legend>
+        <legend id="ModalLabel-speaker">Ajout de personnalité</legend>
         <p>
-           Vous allez ajouter un speaker blabla
+            Les personnalités sont des profils "VIP" dont les commentaires apparaissent d'une couleur différente et sont mis en avant.</br>
+            Ceux sont par exemple des personnes ayant des connaissances sur le domaine de votre vidéo.</br>
+            <em>Rentrez l'adresse mail de la personne que vous souhaitez nommer . </br>
+            Celle-ci recevra un mail automatique l'informant de votre choix et de la date de l'événement</em>
         </p>
     </div>
     <div class="modal-body">
@@ -39,13 +42,13 @@
                 <div style='display:none'><input type='hidden' name='responsibility' value='speaker' ></div>
 
                 <div class="control-group">
-                    <label class="control-label" for="email">E-mail du speaker: </label>
+                    <label class="control-label" for="email">E-mail de la personnalité: </label>
                     <div class="controls">
                         <input type="text" name="email" class="required" id="cemail">
                     </div>
                 </div>
 
-                    <input type="submit" value="Invite" class=" submit btn btn-primary">
+                    <input type="submit" value="Ajouter" class=" submit btn btn-primary">
             </fieldset>
         </form>
     </div>

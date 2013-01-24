@@ -11,7 +11,7 @@ define(
             render : function() {
                 var that = this;
                 this.$el.html(_.template(tplMelomaniac,  this.model.toJSON()));
-                this.$el.append('<a href="'+require.appConfig.accountDeleteUrl+'">upprimer mon compte</a>');
+                this.$el.append('<a href="'+require.appConfig.accountDeleteUrl+'">supprimer mon compte</a>');
                 this.$el.find('#formMelomaniac').validate({
                     rules: {
                     },

@@ -110,7 +110,7 @@ define(
                     ['modules/widget/views/widget', 'modules/widget/views/lives', 'modules/widget/views/speakers',
                         'modules/widget/views/moderators', 'page/model', 'live/collection', 'user/collection'],
                         function(WidgetView, LivesView, SpeakersView, ModeratorsView, PageModel, LivesCollection, UsersCollection){
-                            var  page = new PageModel({id: pageId });
+                            var page = new PageModel({id: pageId });
                             page.fetch({success: function(){
                                 var widgetView = new WidgetView({model: page});
                                 var moderatorsView = new ModeratorsView({collection: new UsersCollection(page.get('moderators'))});

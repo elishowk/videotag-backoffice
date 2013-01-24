@@ -1,31 +1,38 @@
-<form  class="form-horizontal" id="addWidgetForm" action="/" >
+<form  class="form" id="addWidgetForm" action="/" >
     <fieldset>
-        <legend>Créez un widget</legend>
+        <legend>Créer un widget</legend>
+        
+        Complétez ces trois paramètres pour configurer votre vidéo :
+    
         <div class="control-group">
-            <label class="control-label" for="curl">Url youtube: </label>
+            <label class="control-label" for="curl">Adresse web de votre vidéo youtube : </label>
             <div class="controls">
-                <input type="text" name="url" id="curl">
+                <input class="input-xxlarge" type="text" name="url" id="curl">
             </div>
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="cpermalink">Url de votre site: </label>
+            <label class="control-label" for="cpermalink">Adresse web du site sur lequel vous souhaitez intégrer votre widget : </label>
             <div class="controls">
-                <input type="text" name="permalink" id="cpermalink">
+                <input class="input-xxlarge" type="text" name="permalink" id="cpermalink">
             </div>
         </div>
 
         <div class="control-group">
-            <label class="control-label" for="ctitle">Titre du widget: </label>
+            <label class="control-label" for="ctitle">Titre de votre widget : </label>
             <div class="controls">
-                <input type="text" name="title" id="ctitle">
+                <input class="input-xxlarge" type="text" name="title" id="ctitle"></br>
                 <span class="help-inline">Par défaut le titre de la video youtube.</span>
             </div>
         </div>
 
-         <input class="submit btn btn-primary" type="submit" value="Valider vidéo""/>
+        <div class="control-group">
+            <div class="controls">
+                 <input class="submit btn btn-primary"  type="submit" value="Valider"/>
+            </div>
+        </div>
 
-<fieldset>
+    <fieldset>
 </form>
 
         <!-- Button to trigger modal -->
@@ -33,14 +40,13 @@
         <div id="videoModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myModalLabel">Attention !</h3>
+                    <h3 id="myModalLabel">S'agit-il bien de la vidéo pour laquelle vous voulez créer un widget ?</h3>
                     <p>
-                        Bonne video ?
+                        Si ce n'est pas le cas cliquez sur modifier.</br>
+                        <em> Attention : une fois validée, la vidéo ne pourra plus etre modifiée </em>
                     </p>
                 </div>
-                <div class="modal-body">
-                    <p>Aucune preview disponible pour votre vidéo</p>
-                </div>
+                <div class="modal-body"></div>
                 <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Modifier</button>
             <button class="btn btn-primary" id="btn-creation" data-dismiss="modal" aria-hidden="true">Ok</button>
