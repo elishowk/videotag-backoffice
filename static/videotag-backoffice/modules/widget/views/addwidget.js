@@ -17,7 +17,7 @@ define(
                     title: this.$el.find('#ctitle').val(),
                     video: this.$el.find('#curl').val(),
                     permalink: this.$el.find('#cpermalink').val(),
-                    published: true,
+                    published: true
                 });
             },
 
