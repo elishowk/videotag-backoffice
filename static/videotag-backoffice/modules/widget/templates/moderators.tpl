@@ -1,5 +1,5 @@
 <a href="#moderatorModal" role="button" class="btn btn-primary" id="btn-moderatorModal" data-toggle="modal">Ajouter un moderateur</a> 
-
+<%if(moderators.length > 0){%>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -9,19 +9,16 @@
     <tbody>
         <% _.each(moderators, function(moderator) { %>
         <tr>
-            <td  title="<%=moderator.username%>" class='td-moderator'>
-                <% if(moderator.is_active == true){%>
+            <td  <% if(moderator.is_active == false){%>class='unactive'<%}%>>
+                    <img src="http://www.gravatar.com/avatar/<%=moderator.email%>?s=20&d=retro"/>
                     <%= moderator.username %>
-                <%} else {%>
-                   <%=  moderator.username %>(XX)
-                <%}%>
             </td>
             <td><button  id="btn-delmoderator" class="close">&times;</button><td>
         </tr>
         <% }); %>
     </tbody>
 </table>
-
+<%}%>
 <!-- Modal -->
 <div id="moderatorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-moderator" aria-hidden="true">
     <div class="modal-header">

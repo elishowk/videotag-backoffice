@@ -1,5 +1,5 @@
 <a href="#speakerModal" role="button" class="btn btn-primary" id="btn-speakerModal" data-toggle="modal">Ajouter une personnalité</a> 
-
+<%if(speakers.length > 0){%>
 <table class="table table-condensed">
     <thead>
         <tr>
@@ -9,19 +9,16 @@
     <tbody>
         <% _.each(speakers, function(speaker) { %>
         <tr>
-            <td  title="<%=speaker.username%>" speaker-id=<%=speaker.id%> class='td-speaker'>
-                <% if(speaker.is_active == true){%>
+            <td <% if(speaker.is_active == false){%>class='unactive'<%}%>>  
+                    <img src="http://www.gravatar.com/avatar/<%=speaker.email%>?s=20&d=retro"/>
                     <%= speaker.username %>
-                <%} else {%>
-                   <%=  speaker.username %>(XX)
-                <%}%>
             </td>
             <td><button  id="btn-delspeaker" speaker-id=<%=speaker.id%> class="close">&times;</button><td>
         </tr>
         <% }); %>
     </tbody>
 </table>
-
+<%}%>
 <!-- Modal -->
 <div id="speakerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-speaker" aria-hidden="true">
     <div class="modal-header">

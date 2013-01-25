@@ -5,7 +5,7 @@ define(
         return Backbone.View.extend({
             tagName: 'div',
             className: 'span9',
-            initialize: function(){ this.validVideo = false; },
+            initialize: function(){ this.validVideo = "pending"; },
             events : {
                 'change #curl': 'checkVideo',
                 'click #btn-creation': 'addWidget'

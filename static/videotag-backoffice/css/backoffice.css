@@ -26,6 +26,9 @@ body
     position:absolute; bottom:0;
     position:absolute; right:0;
 }
+.unactive{
+    color: red;
+}
 #footer
 {
     margin-top: 15px;
