@@ -1,6 +1,5 @@
-{% load static %}
+{% load static google_analytics %}
 {% load url from future %}
-{% load uservoice %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -10,13 +9,14 @@
         <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-datepicker-2.0/css/datepicker.css"/>
         <link rel="stylesheet" href="{% get_static_prefix %}lib/bootstrap-timepicker-2.0/compiled/timepicker.css"/>
         <link rel="stylesheet" href="{% get_static_prefix %}videotag-backoffice/css/backoffice.css"/>
+        {% google_analytics %}
     </head>
     <body>
     <div class = "container-fluid">
         <div class="row-fluid">
             <div class="row-fluid" id="header">
                 <a href="/" >
-                     <img class="logo"  src="{% get_static_prefix %}videotag-backoffice/img/logo.png" alt="Logo CommonPlay" />
+                     <img class="logo"  src="{% get_static_prefix %}videotag-backoffice/img/logo.png" width="450"  alt="Logo CommonPlay" />
                 </a>
                 <div class="navbar">
                     <div class="navbar-inner">
@@ -124,6 +124,5 @@
             }).call(window);
         </script>
         {% endif %}
-        {% uservoice %}
     </body>
 </html>
