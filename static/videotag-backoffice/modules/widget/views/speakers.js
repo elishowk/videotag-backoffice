@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'modules/widget/templates/speakers.tpl', 'jquery-gravatar', 'jquery-validation'],
+    ['backbone', 'modules/widget/templates/speakers.tpl', 'jquery-validation'],
     function(Backbone, tplSpeakers) {
         'use strict';
         return Backbone.View.extend({

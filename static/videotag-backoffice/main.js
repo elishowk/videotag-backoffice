@@ -14,8 +14,6 @@ require.config({
         'bootstrap': 'lib/bootstrap-2.2.2',
         'bootstrap-datepicker': 'lib/bootstrap-datepicker-2.0/js/bootstrap-datepicker-2.0',
         'bootstrap-timepicker': 'lib/bootstrap-timepicker-2.0/js/bootstrap-timepicker-2.0',
-        'jquery-gravatar': 'lib/jquery-gravatar-1.0.1',
-        'md5': 'lib/md5-2.1',
         'raven': 'lib/raven-0.6.min',
         'app': 'videotag-backoffice/app',
         'modules':  'videotag-backoffice/modules',
@@ -43,10 +41,6 @@ require.config({
             'deps': [
                 'jquery'
             ]
-        },
-
-        'jquery-gravatar': {
-            'deps': ['md5']
         }
     }
 });

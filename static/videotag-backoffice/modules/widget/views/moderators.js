@@ -1,5 +1,5 @@
 define(
-    ['backbone', 'modules/widget/templates/moderators.tpl', 'jquery-gravatar', 'jquery-validation'],
+    ['backbone', 'modules/widget/templates/moderators.tpl', 'jquery-validation'],
     function(Backbone, tplModerators) {
         'use strict';
         return Backbone.View.extend({
