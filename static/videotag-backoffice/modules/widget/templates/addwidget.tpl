@@ -43,7 +43,7 @@
                     <h3 id="myModalLabel">S'agit-il bien de la vidéo pour laquelle vous voulez créer un widget ?</h3>
                     <p>
                         Si ce n'est pas le cas cliquez sur modifier.</br>
-                        <em> Attention : une fois validée, la vidéo ne pourra plus etre modifiée </em>
+                        <em> Attention : une fois validée, la vidéo ne pourra plus être modifiée </em>
                     </p>
                 </div>
                 <div class="modal-body"></div>

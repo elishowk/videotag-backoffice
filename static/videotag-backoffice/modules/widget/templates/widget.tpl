@@ -11,7 +11,7 @@
             </div>
 </div>
 <legend>Configurez votre widget</legend>
-<p><em>Les personalitées en rouges sont celles qui n'ont pas encore accepté votre invitation</em></p>
+<p><em>Les personnalités en rouges sont celles qui n'ont pas encore accepté votre invitation</em></p>
 <!-- Button to trigger modal -->
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

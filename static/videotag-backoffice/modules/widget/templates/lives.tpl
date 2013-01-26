@@ -25,10 +25,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="ModalLabel-live">Ajout de live !</h3>
         </br>
-        <p>
-            Rassemblez votre audience autour de votre vidéo à la date et l'heure de votre choix.</br></br>
-            <em>Quelque soit le moment où ils se connectent, tous les internautes sont assurés de se retrouver au meme instant de la vidéo</em>
-        </p>
+        <p>Rassemblez votre audience autour de votre vidéo à la date et l'heure de votre choix.</p>
+        <p><em>Quelque soit le moment où ils se connectent, tous les internautes sont assurés de se retrouver au même instant de la vidéo</em></p>
     </div>
     <div class="modal-body">
         <form  class="form" id="formAddLive" action="/" >
