@@ -1,5 +1,4 @@
-/*glo
-* bal define*/
+/*global define*/
 
 require.config({
     'baseUrl': require.appConfig.baseUrl,

@@ -14,7 +14,7 @@ define(
             },
             delspeaker : function(e) {
                 e.preventDefault();
-                alerte("La suppréssion est en cour d'implementation");
+                alert("La suppression est en cours d'implémentation.");
                 //this.collection.remove(this.collection.get(this.$()));
             },
             render : function() {
@@ -40,7 +40,7 @@ define(
                     submitHandler: function(form) {
                         that.collection.add({email : that.$el.find('#cemail').val() });
                         that.$el.find('#speakerModal').modal('hide');
-                        alert("Le process d'invitation est en cour d'implementation");
+                        alert("Le processus d'invitation est en cours de création.");
                     }
                 });
                 return this;
