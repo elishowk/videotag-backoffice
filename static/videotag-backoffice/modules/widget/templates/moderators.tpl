@@ -1,4 +1,4 @@
-<a href="#moderatorModal" role="button" class="btn btn-primary" id="btn-moderatorModal" data-toggle="modal">Ajouter un moderateur</a> 
+<a href="#moderatorModal" role="button" class="btn btn-primary" id="btn-moderatorModal" data-toggle="modal">Ajouter un modérateur</a>
 <%if(moderators.length > 0){%>
 <table class="table table-condensed">
     <thead>
@@ -23,12 +23,13 @@
 <div id="moderatorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel-moderator" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="ModalLabel-moderator">Ajout de moderateur</h3>
+        <h3 id="ModalLabel-moderator">Ajout de modérateur</h3>
         </br>
+        <p>Les profils "modérateurs" pourront supprimer l'ensemble des commentaires leur paraissant inadaptés</p>
         <p>
-           Les profils "modérateurs" pourront supprimer l'ensembles des commentaires leurs paraissant inadaptés</br></br>
-            <em>Rentrez l'adresse mail de la personne que vous souhaitez nommer modérateur. </br>
-            Celle-ci recevra un mail automatique l'informant de votre choix et de la date de l'événement</em>
+          <em>Rentrez l'adresse mail de la personne que vous souhaitez nommer modérateur.</em>
+          </br>
+          <em>Celle-ci recevra un mail automatique l'informant de votre choix et de la date de l'événement</em>
         </p>
     </div>
     <div class="modal-body">
@@ -39,7 +40,7 @@
                 <div style='display:none'><input type='hidden' name='responsibility' value='moderator' ></div>
 
                 <div class="control-group">
-                    <label class="control-label" for="email">E-mail du moderateur: </label>
+                    <label class="control-label" for="email">E-mail du modérateur: </label>
                     <div class="controls">
                         <input type="text" name="email" class="required" id="cemail">
                     </div>
